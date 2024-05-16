@@ -11,7 +11,7 @@
 > 
 > 2-Sempre crie um branch relacionado a entidade ou funcionalidade que está sendo desenvolvida.
 > 
-> 3-Padrão para criação de branch  **feature/EC-API-numero-funcionalidade/entidade** EX: feature/EC-APP-01-produtos
+> 3-Padrão para criação de branch  **feature/EC-API-numero-funcionalidade/entidade** EX: feature/EC-API-01-produtos
 > 
 > 4-Depois de finalizada as funcionalidade da branch criar pull request para aprovação.
 
