@@ -3,13 +3,15 @@ package com.store.pandora.api.entitys;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @SQLDelete(sql = "UPDATE produto SET deleted_at = now() WHERE id=?")
-@SQLRestriction("deleted_at is null")
+//@SQLRestriction("deleted_at is null")
+@Where(clause = "deleted_at is null")
 public class Produto {
 
     @Id
