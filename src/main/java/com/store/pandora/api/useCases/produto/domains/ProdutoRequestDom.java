@@ -1,46 +1,21 @@
-package com.store.pandora.api.entitys;
+package com.store.pandora.api.useCases.produto.domains;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
+import com.store.pandora.api.entitys.CategoriasEnum;
+import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@SQLDelete(sql = "UPDATE produto SET deleted_at = now() WHERE id=?")
-@SQLRestriction("deleted_at is null")
-public class Produto {
+public class ProdutoRequestDom {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
     private String nome;
-
-    @Column(nullable = false)
     private String imagem;
-
-    @Column(nullable = false)
     private BigDecimal valorUnitario;
     private String Descricao;
     private String classificacaoIndicativa;
     private String numeroJogadores;
-
-    @Column(nullable = false)
     private CategoriasEnum categoriasEnum;
-
-    @Column
     private LocalDateTime deletedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -105,5 +80,4 @@ public class Produto {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
-
 }
