@@ -3,7 +3,8 @@ package com.store.pandora.api.useCases.usuario;
 import com.store.pandora.api.entitys.Usuario;
 import com.store.pandora.api.useCases.usuario.domains.UsuarioRequestDom;
 import com.store.pandora.api.useCases.usuario.domains.UsuarioResponseDom;
-import com.store.pandora.api.useCases.usuario.implement.UsuarioRepository;
+import com.store.pandora.api.useCases.usuario.implement.mappers.UsuarioMappers;
+import com.store.pandora.api.useCases.usuario.implement.repositorys.UsuarioRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,32 +22,15 @@ public class UsuarioService {
     public UsuarioResponseDom carregarUsuarioById(Long id){
         Optional<Usuario> resultado = usuarioRepository.findById(id);
 
-        if(resultado.isPresent()){
-            Usuario usuario = resultado.get();
-            UsuarioResponseDom response = new UsuarioResponseDom();
-
-            response.setId(usuario.getId());
-            response.setLogin(usuario.getLogin());
-            response.setSenha(usuario.getSenha());
-            response.setDeleted_at(usuario.getDeletedAt());
-
-            return response;
-        }
-        return null;
+        return resultado.map(UsuarioMappers::usuarioParaUsuarioResponseDom).orElse(null);
     }
 
     public List<UsuarioResponseDom> carregarUsuario(){
         List<Usuario> resultadoLista = usuarioRepository.findAll();
         List<UsuarioResponseDom> responseLista = new ArrayList<>();
 
-        for(Usuario resultado: resultadoLista){
-            UsuarioResponseDom aux = new UsuarioResponseDom();
-            aux.setId(resultado.getId());
-            aux.setLogin(resultado.getLogin());
-            aux.setSenha(resultado.getSenha());
-            aux.setDeleted_at(resultado.getDeletedAt());
-
-            responseLista.add(aux);
+        if (!resultadoLista.isEmpty()){
+            responseLista = resultadoLista.stream().map(UsuarioMappers::usuarioParaUsuarioResponseDom).toList();
         }
 
         return responseLista;
@@ -67,12 +51,7 @@ public class UsuarioService {
 
         Usuario resultado = usuarioRepository.save(usuarioEntidade);
 
-        UsuarioResponseDom response = new UsuarioResponseDom();
-        response.setId(resultado.getId());
-        response.setLogin(resultado.getLogin());
-        response.setSenha(resultado.getSenha());
-
-        return response;
+        return UsuarioMappers.usuarioParaUsuarioResponseDom(resultado);
     }
 
     public UsuarioResponseDom atualizarUsuario(Long id, UsuarioRequestDom usuario) throws CustomException{
@@ -90,16 +69,7 @@ public class UsuarioService {
             return usuarioRepository.save(record);
         });
 
-        if (resultado.isPresent()) {
-            Usuario usuarioEntidade = resultado.get();
-
-            UsuarioResponseDom response = new UsuarioResponseDom();
-            response.setLogin(usuarioEntidade.getLogin());
-            response.setSenha(usuarioEntidade.getSenha());
-
-            return response;
-        }
-        return null;
+        return resultado.map(UsuarioMappers::usuarioParaUsuarioResponseDom).orElse(null);
     }
 
     private List<String> validaUsuario(UsuarioRequestDom usuario){
