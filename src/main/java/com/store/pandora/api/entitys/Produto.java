@@ -7,6 +7,7 @@ import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @SQLDelete(sql = "UPDATE produto SET deleted_at = now() WHERE id=?")
@@ -35,6 +36,17 @@ public class Produto {
 
     @Column
     private LocalDateTime deletedAt;
+
+    @OneToMany(mappedBy = "produto")
+    List<Estoque> estoque;
+
+    public List<Estoque> getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(List<Estoque> estoque) {
+        this.estoque = estoque;
+    }
 
     public Long getId() {
         return id;
