@@ -39,11 +39,11 @@ public class EnderecoService {
 
     public EnderecoResponseDom criarEndereco(EnderecoRequestDom endereco) throws CustomException {
 
-//        List<String> mensagens = this.validaEndereco(endereco);
+        List<String> mensagens = this.validaEndereco(endereco);
 
-//        if(!mensagens.isEmpty()){
-//            throw new CustomException(mensagens);
-//        }
+        if(!mensagens.isEmpty()){
+            throw new CustomException(mensagens);
+        }
 
         Endereco enderecoEntidade = new Endereco();
         enderecoEntidade.setApelido(endereco.getApelido());
@@ -59,11 +59,11 @@ public class EnderecoService {
     }
 
     public EnderecoResponseDom atualizarEndereco(Long id, EnderecoRequestDom endereco) throws CustomException {
-        //        List<String> mensagens = this.validaEndereco(endereco);
+                List<String> mensagens = this.validaEndereco(endereco);
 
-//        if(!mensagens.isEmpty()){
-//            throw new CustomException(mensagens);
-//        }
+        if(!mensagens.isEmpty()){
+            throw new CustomException(mensagens);
+        }
 
         Optional<Endereco> resultado = enderecoRepository.findById(id).map(record -> {
             record.setApelido(endereco.getApelido());
