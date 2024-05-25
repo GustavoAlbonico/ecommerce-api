@@ -1,12 +1,9 @@
 package com.store.pandora.api.controllers;
-
-import com.store.pandora.api.useCases.produto.ProdutoService;
-import com.store.pandora.api.useCases.produto.domains.ProdutoRequestDom;
-import com.store.pandora.api.useCases.produto.domains.ProdutoResponseDom;
+import com.store.pandora.api.useCases.estoque.EstoqueService;
+import com.store.pandora.api.useCases.estoque.domains.EstoqueResponseDom;
+import com.store.pandora.api.useCases.estoque.domains.EstoqueResquestDom;
 import com.store.pandora.api.utils.CustomException;
 import com.store.pandora.api.utils.ResponseUtil;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,12 +22,12 @@ public class EstoqueController {
     @GetMapping("/carregar/{id}")
     public ResponseEntity<?> carregarEstoqueById(@PathVariable Long id){
         try{
-            ProdutoResponseDom response = estoqueService.carregarProdutoById(id);
+            EstoqueResponseDom response = estoqueService.carregarEstoqueById(id);
 
             if(response != null){
                 return  ResponseEntity.ok().body(response);
             }
-            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum produto cadastrado!"));
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado!"));
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
@@ -40,9 +37,9 @@ public class EstoqueController {
     @GetMapping("/carregar")
     public ResponseEntity<?> carregarEstoque(){
         try{
-            List<ProdutoResponseDom> responseList = estoqueService.carregarProduto();
+            List<EstoqueResponseDom> responseList = estoqueService.carregarEstoque();
             if(responseList.isEmpty()){
-                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum produto cadastrado!"));
+                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado!"));
             }
             return ResponseEntity.ok().body(responseList);
         } catch (Exception ex) {
@@ -52,9 +49,9 @@ public class EstoqueController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<?> criarEstoque(@RequestBody ProdutoRequestDom produto) {
+    public ResponseEntity<?> criarEstoque(@RequestBody EstoqueResquestDom estoque) {
         try {
-            ProdutoResponseDom response = estoqueService.criarEstoque(produto);
+            EstoqueResponseDom response = estoqueService.criarEstoque(estoque);
             return ResponseEntity.status(201).body(response);
         } catch (CustomException ce) {
             ce.printStackTrace();
@@ -66,9 +63,9 @@ public class EstoqueController {
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarEstoque(@PathVariable Long id, @RequestBody ProdutoRequestDom produto) {
+    public ResponseEntity<?> atualizarEstoque(@PathVariable Long id, @RequestBody EstoqueResquestDom estoque) {
         try {
-            ProdutoResponseDom response = estoqueService.atualizarEstoque(id, produto);
+            EstoqueResponseDom response = estoqueService.atualizarEstoque(id, estoque);
             if(response == null) {
                 return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Erro inesperado!"));
             }
