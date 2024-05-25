@@ -13,7 +13,7 @@ public class ProdutoMappers {
         response.setDescricao(produto.getDescricao());
         response.setClassificacaoIndicativa(produto.getClassificacaoIndicativa());
         response.setNumeroJogadores(produto.getNumeroJogadores());
-        response.setCategoriasEnum(produto.getCategoriasEnum());
+        response.setCategoria(produto.getCategoria());
         response.setDeletedAt(produto.getDeletedAt());
 
         return response;

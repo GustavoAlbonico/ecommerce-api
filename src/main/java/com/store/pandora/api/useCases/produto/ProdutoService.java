@@ -1,5 +1,6 @@
 package com.store.pandora.api.useCases.produto;
 
+import com.store.pandora.api.entitys.CategoriasEnum;
 import com.store.pandora.api.entitys.Produto;
 import com.store.pandora.api.useCases.produto.domains.ProdutoRequestDom;
 import com.store.pandora.api.useCases.produto.domains.ProdutoResponseDom;
@@ -38,6 +39,17 @@ public class ProdutoService {
         return responseLista;
     }
 
+    public List<ProdutoResponseDom> carregarProdutosByCategoria(CategoriasEnum categoria) {
+        List<Produto> resultadoLista = produtoRepository.findByCategoria(categoria);
+        List<ProdutoResponseDom> responseLista = new ArrayList<>();
+
+        if(!resultadoLista.isEmpty()) {
+            responseLista =  resultadoLista.stream().map(ProdutoMappers::produtoParaProdutoResponseDom).toList();
+        }
+
+        return responseLista;
+    }
+
     public ProdutoResponseDom criarProduto(ProdutoRequestDom produto) throws CustomException {
 
         List<String> mensagens = this.validaProduto(produto);
@@ -52,7 +64,7 @@ public class ProdutoService {
         produtoEntidade.setDescricao(produto.getDescricao());
         produtoEntidade.setClassificacaoIndicativa(produto.getClassificacaoIndicativa());
         produtoEntidade.setNumeroJogadores(produto.getNumeroJogadores());
-        produtoEntidade.setCategoriasEnum(produto.getCategoriasEnum());
+        produtoEntidade.setCategoria(produto.getCategoria());
         produtoEntidade.setDeletedAt(produto.getDeletedAt());
 
         Produto resultado = produtoRepository.save(produtoEntidade);
@@ -74,13 +86,17 @@ public class ProdutoService {
             record.setDescricao(produto.getDescricao());
             record.setClassificacaoIndicativa(produto.getClassificacaoIndicativa());
             record.setNumeroJogadores(produto.getNumeroJogadores());
-            record.setCategoriasEnum(produto.getCategoriasEnum());
+            record.setCategoria(produto.getCategoria());
             record.setDeletedAt(produto.getDeletedAt());
 
             return produtoRepository.save(record);
         });
 
         return resultado.map(ProdutoMappers::produtoParaProdutoResponseDom).orElse(null);
+    }
+
+    public void excluirProduto(Long id){
+         produtoRepository.deleteById(id);
     }
 
     private List<String> validaProduto(ProdutoRequestDom produto){
@@ -99,7 +115,7 @@ public class ProdutoService {
             mensagens.add("Imagem do produto não informado");
         }
 
-        if(produto.getCategoriasEnum() == null){
+        if(produto.getCategoria() == null){
             mensagens.add("Categoria do produto não informado");
         }
 

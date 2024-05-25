@@ -80,6 +80,10 @@ public class EstoqueService {
         return resultado.map(EstoqueMappers::estoqueParaEstoqueResponseDom).orElse(null);
     }
 
+    public void excluirEstoque(Long id){
+        estoqueRepository.deleteById(id);
+    }
+
     private List<String> validaEstoque(EstoqueResquestDom estoque){
         List<String> mensagens =  new ArrayList<>();
         Optional<Produto> produtoEncontrado =  produtoRepository.findById(estoque.getProduto_id());

@@ -1,7 +1,6 @@
 package com.store.pandora.api.useCases.produto.domains;
 
 import com.store.pandora.api.entitys.CategoriasEnum;
-import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,7 +13,7 @@ public class ProdutoRequestDom {
     private String Descricao;
     private String classificacaoIndicativa;
     private String numeroJogadores;
-    private CategoriasEnum categoriasEnum;
+    private CategoriasEnum categoria;
     private LocalDateTime deletedAt;
 
     public String getNome() {
@@ -65,12 +64,12 @@ public class ProdutoRequestDom {
         this.numeroJogadores = numeroJogadores;
     }
 
-    public CategoriasEnum getCategoriasEnum() {
-        return categoriasEnum;
+    public CategoriasEnum getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriasEnum(CategoriasEnum categoriasEnum) {
-        this.categoriasEnum = categoriasEnum;
+    public void setCategoria(CategoriasEnum categoria) {
+        this.categoria = categoria;
     }
 
     public LocalDateTime getDeletedAt() {

@@ -27,7 +27,7 @@ public class EstoqueController {
             if(response != null){
                 return  ResponseEntity.ok().body(response);
             }
-            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado!"));
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado com esse id!"));
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
@@ -39,7 +39,7 @@ public class EstoqueController {
         try{
             List<EstoqueResponseDom> responseList = estoqueService.carregarEstoque();
             if(responseList.isEmpty()){
-                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado!"));
+                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado com esse id!"));
             }
             return ResponseEntity.ok().body(responseList);
         } catch (Exception ex) {
@@ -73,6 +73,16 @@ public class EstoqueController {
         } catch (CustomException ce) {
             ce.printStackTrace();
             return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
+        } catch (Exception ex) {
+            return  ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> excluirEstoque(@PathVariable Long id){
+        try {
+            estoqueService.excluirEstoque(id);
+            return ResponseEntity.ok(null);
         } catch (Exception ex) {
             return  ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
         }

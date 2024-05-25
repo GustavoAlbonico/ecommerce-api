@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@SQLDelete(sql = "UPDATE usuario SET deleted_at = now() WHERE id=?")
+@SQLDelete(sql = "UPDATE estoque SET deleted_at = now() WHERE id=?")
 @SQLRestriction("deleted_at is null")
 public class Estoque {
 
