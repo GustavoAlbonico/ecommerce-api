@@ -14,7 +14,7 @@ public class ProdutoResponseDom {
     private String Descricao;
     private String classificacaoIndicativa;
     private String numeroJogadores;
-    private CategoriasEnum categoriasEnum;
+    private CategoriasEnum categoria;
     private LocalDateTime deletedAt;
 
     public Long getId() {
@@ -73,12 +73,12 @@ public class ProdutoResponseDom {
         this.numeroJogadores = numeroJogadores;
     }
 
-    public CategoriasEnum getCategoriasEnum() {
-        return categoriasEnum;
+    public CategoriasEnum getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriasEnum(CategoriasEnum categoriasEnum) {
-        this.categoriasEnum = categoriasEnum;
+    public void setCategoria(CategoriasEnum categoria) {
+        this.categoria = categoria;
     }
 
     public LocalDateTime getDeletedAt() {

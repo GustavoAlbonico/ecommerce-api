@@ -3,15 +3,14 @@ package com.store.pandora.api.entitys;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @SQLDelete(sql = "UPDATE produto SET deleted_at = now() WHERE id=?")
-//@SQLRestriction("deleted_at is null")
-@Where(clause = "deleted_at is null")
+@SQLRestriction("deleted_at is null")
 public class Produto {
 
     @Id
@@ -31,10 +30,21 @@ public class Produto {
     private String numeroJogadores;
 
     @Column(nullable = false)
-    private CategoriasEnum categoriasEnum;
+    private CategoriasEnum categoria;
 
     @Column
     private LocalDateTime deletedAt;
+
+    @OneToMany(mappedBy = "produto")
+    List<Estoque> estoque;
+
+    public List<Estoque> getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(List<Estoque> estoque) {
+        this.estoque = estoque;
+    }
 
     public Long getId() {
         return id;
@@ -92,12 +102,12 @@ public class Produto {
         this.numeroJogadores = numeroJogadores;
     }
 
-    public CategoriasEnum getCategoriasEnum() {
-        return categoriasEnum;
+    public CategoriasEnum getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriasEnum(CategoriasEnum categoriasEnum) {
-        this.categoriasEnum = categoriasEnum;
+    public void setCategoria(CategoriasEnum categoria) {
+        this.categoria = categoria;
     }
 
     public LocalDateTime getDeletedAt() {
