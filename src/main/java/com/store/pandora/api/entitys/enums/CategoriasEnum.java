@@ -1,4 +1,4 @@
-package com.store.pandora.api.entitys;
+package com.store.pandora.api.entitys.enums;
 
 public enum CategoriasEnum {
     CARTAS,

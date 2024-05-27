@@ -1,6 +1,6 @@
 package com.store.pandora.api.useCases.produto;
 
-import com.store.pandora.api.entitys.CategoriasEnum;
+import com.store.pandora.api.entitys.enums.CategoriasEnum;
 import com.store.pandora.api.entitys.Produto;
 import com.store.pandora.api.useCases.produto.domains.ProdutoRequestDom;
 import com.store.pandora.api.useCases.produto.domains.ProdutoResponseDom;

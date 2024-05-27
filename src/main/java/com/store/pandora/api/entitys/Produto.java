@@ -1,5 +1,6 @@
 package com.store.pandora.api.entitys;
 
+import com.store.pandora.api.entitys.enums.CategoriasEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
