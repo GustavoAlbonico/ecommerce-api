@@ -21,7 +21,8 @@ public class Cliente {
     private String email;
     @Column
     private String telefone;
-    @Column
+    @OneToOne
+    @JoinColumn(name = "usuario_id", nullable = false )
     private Usuario usuario;
     @Column
     private LocalDateTime deletedAt;
