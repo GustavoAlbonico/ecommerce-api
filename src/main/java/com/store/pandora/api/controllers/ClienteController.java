@@ -38,7 +38,7 @@ public class ClienteController {
     @GetMapping("/carregar")
     public ResponseEntity<?> carregarCliente(){
         try{
-            List<ClienteResponseDom> responseList = clienteService.carregarProduto();
+            List<ClienteResponseDom> responseList = clienteService.carregarCliente();
             if(responseList.isEmpty()){
                 return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum cliente cadastrado!"));
             }
