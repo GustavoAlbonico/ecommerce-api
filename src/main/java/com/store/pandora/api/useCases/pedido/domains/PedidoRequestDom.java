@@ -1,19 +1,15 @@
 package com.store.pandora.api.useCases.pedido.domains;
-
-import com.store.pandora.api.entitys.Cliente;
-import com.store.pandora.api.entitys.Endereco;
 import com.store.pandora.api.entitys.enums.FormaPagamentoEnum;
-import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 public class PedidoRequestDom {
-    private BigDecimal valorTotal;
 
     private FormaPagamentoEnum formaPagamento;
 
-    private Endereco endereco;
+    private Long endereco_id;
 
-    private Cliente cliente;
+    private Long cliente_id;
+
+    private List<PedidoPedidoItemRequestDom> listaPedidoItem;
 }
