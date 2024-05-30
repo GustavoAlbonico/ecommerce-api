@@ -21,6 +21,7 @@ public class Pedido {
     private BigDecimal valorTotal;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private FormaPagamentoEnum formaPagamento;
 
     @Column

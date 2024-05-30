@@ -31,6 +31,7 @@ public class Produto {
     private String numeroJogadores;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CategoriasEnum categoria;
 
     @Column

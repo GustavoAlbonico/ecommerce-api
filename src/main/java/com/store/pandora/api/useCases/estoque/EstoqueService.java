@@ -6,6 +6,7 @@ import com.store.pandora.api.useCases.estoque.domains.EstoqueResponseDom;
 import com.store.pandora.api.useCases.estoque.domains.EstoqueResquestDom;
 import com.store.pandora.api.useCases.estoque.implement.mappers.EstoqueMappers;
 import com.store.pandora.api.useCases.estoque.implement.repositorys.EstoqueRepository;
+import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemRequestDom;
 import com.store.pandora.api.useCases.produto.implement.repositorys.ProdutoRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,26 @@ public class EstoqueService {
         });
 
         return resultado.map(EstoqueMappers::estoqueParaEstoqueResponseDom).orElse(null);
+    }
+
+    public boolean atualizarListaEstoque(List<PedidoPedidoItemRequestDom> listaPedidoItemRequest){
+        List<Estoque> listaEstoqueEntidade = listaPedidoItemRequest.stream()
+                .map(pedidoItem -> {
+                    Estoque estoqueResultado =  estoqueRepository.findByProdutoId(pedidoItem.getProduto_id());
+                    Estoque estoqueEntidade = new Estoque();
+
+                    estoqueEntidade.setId(estoqueResultado.getId());
+                    estoqueEntidade.setDeletedAt(estoqueResultado.getDeletedAt());
+                    estoqueEntidade.setProduto(estoqueResultado.getProduto());
+
+                    Integer quantidadeAtualizada = estoqueResultado.getQuantidade() - pedidoItem.getQuantidade();
+
+                    estoqueEntidade.setQuantidade(quantidadeAtualizada);
+
+                    return estoqueEntidade;
+                }).toList();
+
+        return !estoqueRepository.saveAll(listaEstoqueEntidade).isEmpty();
     }
 
     public void excluirEstoque(Long id){
