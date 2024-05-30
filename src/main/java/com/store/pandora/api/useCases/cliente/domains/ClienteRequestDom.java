@@ -1,5 +1,6 @@
 package com.store.pandora.api.useCases.cliente.domains;
 
+import com.store.pandora.api.entitys.Endereco;
 import com.store.pandora.api.entitys.Usuario;
 
 import java.time.LocalDate;

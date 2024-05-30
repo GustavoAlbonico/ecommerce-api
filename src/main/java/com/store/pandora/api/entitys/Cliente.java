@@ -5,6 +5,7 @@ import org.hibernate.annotations.SQLDelete;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Cliente {
@@ -24,6 +25,10 @@ public class Cliente {
     @OneToOne
     @JoinColumn(name = "usuario_id", nullable = false )
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Endereco> enderecos;
+
     @Column
     private LocalDateTime deletedAt;
 
