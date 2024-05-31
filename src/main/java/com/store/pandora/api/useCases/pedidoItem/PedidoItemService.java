@@ -1,5 +1,6 @@
 package com.store.pandora.api.useCases.pedidoItem;
 
+import com.store.pandora.api.entitys.Estoque;
 import com.store.pandora.api.entitys.Pedido;
 import com.store.pandora.api.entitys.PedidoItem;
 import com.store.pandora.api.entitys.Produto;
@@ -16,6 +17,8 @@ import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,11 +37,11 @@ public class PedidoItemService {
 
     public List<PedidoItemResponseDom> criarListaPedidoItem(Long pedidoId, List<PedidoPedidoItemRequestDom> listaPedidoItem) throws CustomException{
 
-//        List<String> mensagens = this.validaPedidoItem(listaPedidoItem);
-//
-//        if (!mensagens.isEmpty()){
-//            throw new CustomException(mensagens);
-//        }
+        List<String> mensagens = this.validaListaPedidoItem(listaPedidoItem);
+
+        if (!mensagens.isEmpty()){
+            throw new CustomException(mensagens);
+        }
 
         Optional<Pedido> pedidoEncontrado = pedidoRepository.findById(pedidoId);
         Pedido pedido = pedidoEncontrado.get();
@@ -61,5 +64,30 @@ public class PedidoItemService {
         List<PedidoItem> resultadoLista = pedidoItemRepository.saveAll(listaPedidoItemEntidade);
 
         return resultadoLista.stream().map(PedidoItemMappers::pedidoItemParaPedidoItemResponseDom).collect(Collectors.toList());
+    }
+
+    private List<String> validaListaPedidoItem(List<PedidoPedidoItemRequestDom> listaPedidoItemRequest){
+
+        List<String> mensagens = new ArrayList<>();
+
+        for(PedidoPedidoItemRequestDom pedidoItemRequest : listaPedidoItemRequest){
+
+            Optional<Produto> produtoEncontrado = produtoRepository.findById(pedidoItemRequest.getProduto_id());
+
+            if(produtoEncontrado.isEmpty()){
+                mensagens.add("Produto_id " + pedidoItemRequest.getProduto_id() + " inválido ou não informado!!");
+                continue;
+            }
+
+            if(pedidoItemRequest.getQuantidade() == null || pedidoItemRequest.getQuantidade() <= 0){
+                mensagens.add("Quantidade do produto " + produtoEncontrado.get().getNome() + " inválida ou não informada!");
+            }
+
+            if(pedidoItemRequest.getValorUnitario() == null || pedidoItemRequest.getValorUnitario().compareTo(BigDecimal.ZERO) < 1){
+                mensagens.add("Valor Unitário do produto " + produtoEncontrado.get().getNome() + " inválido ou não informado!");
+            }
+
+        }
+        return mensagens;
     }
 }
