@@ -1,6 +1,6 @@
 package com.store.pandora.api.useCases.produto.domains;
 
-import com.store.pandora.api.entitys.CategoriasEnum;
+import com.store.pandora.api.entitys.enums.CategoriasEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

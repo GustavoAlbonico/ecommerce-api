@@ -1,6 +1,6 @@
 package com.store.pandora.api.useCases.produto.implement.repositorys;
 
-import com.store.pandora.api.entitys.CategoriasEnum;
+import com.store.pandora.api.entitys.enums.CategoriasEnum;
 import com.store.pandora.api.entitys.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -6,11 +6,13 @@ import com.store.pandora.api.useCases.estoque.domains.EstoqueResponseDom;
 import com.store.pandora.api.useCases.estoque.domains.EstoqueResquestDom;
 import com.store.pandora.api.useCases.estoque.implement.mappers.EstoqueMappers;
 import com.store.pandora.api.useCases.estoque.implement.repositorys.EstoqueRepository;
+import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemRequestDom;
 import com.store.pandora.api.useCases.produto.implement.repositorys.ProdutoRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,8 +82,52 @@ public class EstoqueService {
         return resultado.map(EstoqueMappers::estoqueParaEstoqueResponseDom).orElse(null);
     }
 
+    public void atualizarListaEstoque(List<PedidoPedidoItemRequestDom> listaPedidoItemRequest) throws CustomException {
+
+        List<String> mensagens = this.validaQuantidadeEstoque(listaPedidoItemRequest);
+
+        if(!mensagens.isEmpty()){
+            throw new CustomException(mensagens);
+        }
+
+        List<Estoque> listaEstoqueEntidade = listaPedidoItemRequest.stream()
+                .map(pedidoItem -> {
+                    Estoque estoqueEncontrado =  estoqueRepository.findByProdutoId(pedidoItem.getProduto_id());
+                    Estoque estoqueEntidade = new Estoque();
+
+                    estoqueEntidade.setId(estoqueEncontrado.getId());
+                    estoqueEntidade.setDeletedAt(estoqueEncontrado.getDeletedAt());
+                    estoqueEntidade.setProduto(estoqueEncontrado.getProduto());
+
+                    Integer quantidadeAtualizada = estoqueEncontrado.getQuantidade() - pedidoItem.getQuantidade();
+
+                    estoqueEntidade.setQuantidade(quantidadeAtualizada);
+
+                    return estoqueEntidade;
+                }).toList();
+
+        estoqueRepository.saveAll(listaEstoqueEntidade);
+    }
+
     public void excluirEstoque(Long id){
         estoqueRepository.deleteById(id);
+    }
+
+    private List<String> validaQuantidadeEstoque(List<PedidoPedidoItemRequestDom> listaPedidoItemRequest){
+        List<String> mensagens = new ArrayList<>();
+
+        for(PedidoPedidoItemRequestDom pedidoItemRequest : listaPedidoItemRequest){
+            Optional<Produto> produtoEncontrado = produtoRepository.findById(pedidoItemRequest.getProduto_id());
+
+            Estoque estoqueEncontrado =  estoqueRepository.findByProdutoId(pedidoItemRequest.getProduto_id());
+
+            int quantidadeAtualizada = estoqueEncontrado.getQuantidade() - pedidoItemRequest.getQuantidade();
+
+            if(quantidadeAtualizada < 0){
+                mensagens.add("Não tem quantidade do produto " + produtoEncontrado.get().getNome() + " suficiente em estoque!(" + estoqueEncontrado.getQuantidade() + " unidade(s) em estoque)");
+            }
+        }
+        return mensagens;
     }
 
     private List<String> validaEstoque(EstoqueResquestDom estoque){

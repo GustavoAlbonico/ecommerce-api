@@ -1,5 +1,6 @@
 package com.store.pandora.api.entitys;
 
+import com.store.pandora.api.entitys.enums.CategoriasEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -30,6 +31,7 @@ public class Produto {
     private String numeroJogadores;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CategoriasEnum categoria;
 
     @Column
