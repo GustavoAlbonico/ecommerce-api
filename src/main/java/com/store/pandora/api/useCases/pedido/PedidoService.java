@@ -17,6 +17,7 @@ import com.store.pandora.api.useCases.pedidoItem.domains.PedidoItemResponseDom;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class PedidoService {
         this.pedidoItemService = pedidoItemService;
         this.estoqueService = estoqueService;
     }
-
+    @Transactional(rollbackFor = {Exception.class, CustomException.class})
     public PedidoResponseDom criarPedido(PedidoRequestDom pedido) throws CustomException {
         List<String> mensagens = this.validaPedido(pedido);
 
@@ -87,12 +88,16 @@ public class PedidoService {
             mensagens.add("Forma de pagamento do pedido não informada!");
         }
 
-        if(clienteRepository.findById(pedido.getCliente_id()).isEmpty()){
-            mensagens.add("cliente_id do pedido inválido ou não informado!");
+        if(pedido.getCliente_id() == null){
+            mensagens.add("cliente_id do pedido não informado!");
+        } else if(clienteRepository.findById(pedido.getCliente_id()).isEmpty()){
+            mensagens.add("cliente_id do pedido inválido!");
         }
 
-        if(enderecoRepository.findById(pedido.getEndereco_id()).isEmpty()){
-            mensagens.add("endereco_id do pedido inválido ou não informado!");
+        if(pedido.getEndereco_id() == null){
+            mensagens.add("endereco_id do pedido não informado!");
+        } else if(enderecoRepository.findById(pedido.getEndereco_id()).isEmpty()){
+            mensagens.add("endereco_id do pedido inválido!");
         }
 
         return  mensagens;

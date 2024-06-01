@@ -74,19 +74,25 @@ public class PedidoItemService {
 
             Optional<Produto> produtoEncontrado = produtoRepository.findById(pedidoItemRequest.getProduto_id());
 
-            if(produtoEncontrado.isEmpty()){
-                mensagens.add("Produto_id " + pedidoItemRequest.getProduto_id() + " inválido ou não informado!!");
+            if(pedidoItemRequest.getProduto_id() == null){
+                mensagens.add("produto_id do produto não informado!");
+                continue;
+            } else if(produtoEncontrado.isEmpty()){
+                mensagens.add("produto_id " + pedidoItemRequest.getProduto_id() + " inválido!");
                 continue;
             }
 
-            if(pedidoItemRequest.getQuantidade() == null || pedidoItemRequest.getQuantidade() <= 0){
-                mensagens.add("Quantidade do produto " + produtoEncontrado.get().getNome() + " inválida ou não informada!");
+            if(pedidoItemRequest.getQuantidade() == null){
+                mensagens.add("Quantidade do produto " + produtoEncontrado.get().getNome() + " não informada!");
+            } else if(pedidoItemRequest.getQuantidade() <= 0){
+                mensagens.add("Quantidade do produto " + produtoEncontrado.get().getNome() + " inválida!");
             }
 
-            if(pedidoItemRequest.getValorUnitario() == null || pedidoItemRequest.getValorUnitario().compareTo(BigDecimal.ZERO) < 1){
-                mensagens.add("Valor Unitário do produto " + produtoEncontrado.get().getNome() + " inválido ou não informado!");
+            if(pedidoItemRequest.getValorUnitario() == null){
+                mensagens.add("Valor Unitário do produto " + produtoEncontrado.get().getNome() + " não informado!");
+            } else if(pedidoItemRequest.getValorUnitario().compareTo(BigDecimal.ZERO) < 1){
+                mensagens.add("Valor Unitário do produto " + produtoEncontrado.get().getNome() + " inválido!");
             }
-
         }
         return mensagens;
     }

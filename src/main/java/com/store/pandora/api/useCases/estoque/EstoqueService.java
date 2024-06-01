@@ -124,7 +124,7 @@ public class EstoqueService {
             int quantidadeAtualizada = estoqueEncontrado.getQuantidade() - pedidoItemRequest.getQuantidade();
 
             if(quantidadeAtualizada < 0){
-                mensagens.add("Não tem quantidade do produto " + produtoEncontrado.get().getNome() + " suficiente em estoque!");
+                mensagens.add("Não tem quantidade do produto " + produtoEncontrado.get().getNome() + " suficiente em estoque!(" + estoqueEncontrado.getQuantidade() + " unidade(s) em estoque)");
             }
         }
         return mensagens;
