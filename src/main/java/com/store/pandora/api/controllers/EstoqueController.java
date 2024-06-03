@@ -39,7 +39,7 @@ public class EstoqueController {
         try{
             List<EstoqueResponseDom> responseList = estoqueService.carregarEstoque();
             if(responseList.isEmpty()){
-                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado com esse id!"));
+                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado!"));
             }
             return ResponseEntity.ok().body(responseList);
         } catch (Exception ex) {
