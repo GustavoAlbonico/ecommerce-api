@@ -1,7 +1,8 @@
 package com.store.pandora.api.controllers;
-import com.store.pandora.api.useCases.estoque.EstoqueService;
-import com.store.pandora.api.useCases.estoque.domains.EstoqueResponseDom;
-import com.store.pandora.api.useCases.estoque.domains.EstoqueResquestDom;
+
+import com.store.pandora.api.useCases.cartao.CartaoService;
+import com.store.pandora.api.useCases.cartao.domains.CartaoRequestDom;
+import com.store.pandora.api.useCases.cartao.domains.CartaoResponseDom;
 import com.store.pandora.api.utils.CustomException;
 import com.store.pandora.api.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +14,34 @@ import java.util.List;
 
 @CrossOrigin
 @Controller
-@RequestMapping("/estoque")
-public class EstoqueController {
+@RequestMapping("/cartao")
+public class CartaoController {
 
     @Autowired
-    private EstoqueService estoqueService;
+    private CartaoService cartaoService;
+
+    @PostMapping("/criar")
+    public ResponseEntity<?> criarCartao(@RequestBody CartaoRequestDom cartao){
+        try {
+            CartaoResponseDom response = cartaoService.criarCartao(cartao);
+            return ResponseEntity.status(201).body(response);
+        }catch (CustomException ce){
+            ce.printStackTrace();
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
+        }
+    }
 
     @GetMapping("/carregar/{id}")
-    public ResponseEntity<?> carregarEstoqueById(@PathVariable Long id){
+    public ResponseEntity<?> carregarCartaoById(@PathVariable Long id){
         try{
-            EstoqueResponseDom response = estoqueService.carregarEstoqueById(id);
-
+            CartaoResponseDom response = cartaoService.carregarCartaoById(id);
             if(response != null){
                 return  ResponseEntity.ok().body(response);
             }
-            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado com esse id!"));
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum cartao cadastrado com esse id!"));
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
@@ -35,11 +49,11 @@ public class EstoqueController {
     }
 
     @GetMapping("/carregar")
-    public ResponseEntity<?> carregarEstoque(){
+    public ResponseEntity<?> carregarCartao(){
         try{
-            List<EstoqueResponseDom> responseList = estoqueService.carregarEstoque();
+            List<CartaoResponseDom> responseList = cartaoService.carregarCartao();
             if(responseList.isEmpty()){
-                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum item em estoque cadastrado!"));
+                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum cartao cadastrado"));
             }
             return ResponseEntity.ok().body(responseList);
         } catch (Exception ex) {
@@ -48,24 +62,10 @@ public class EstoqueController {
         }
     }
 
-    @PostMapping("/criar")
-    public ResponseEntity<?> criarEstoque(@RequestBody EstoqueResquestDom estoque) {
-        try {
-            EstoqueResponseDom response = estoqueService.criarEstoque(estoque);
-            return ResponseEntity.status(201).body(response);
-        } catch (CustomException ce) {
-            ce.printStackTrace();
-            return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
-        } catch (Exception ex){
-            ex.printStackTrace();
-            return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
-        }
-    }
-
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarEstoque(@PathVariable Long id, @RequestBody EstoqueResquestDom estoque) {
+    public ResponseEntity<?> atualizarCartao(@PathVariable Long id, @RequestBody CartaoRequestDom cartao) {
         try {
-            EstoqueResponseDom response = estoqueService.atualizarEstoque(id, estoque);
+            CartaoResponseDom response = cartaoService.atualizarCartao(id, cartao);
             if(response == null) {
                 return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Erro inesperado!"));
             }
@@ -79,12 +79,14 @@ public class EstoqueController {
     }
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<?> excluirEstoque(@PathVariable Long id){
+    public ResponseEntity<?> excluirCartao(@PathVariable Long id){
         try {
-            estoqueService.excluirEstoque(id);
+            cartaoService.excluirCartao(id);
             return ResponseEntity.ok(null);
         } catch (Exception ex) {
             return  ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
         }
     }
+
+
 }
