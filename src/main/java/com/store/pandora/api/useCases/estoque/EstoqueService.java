@@ -26,7 +26,13 @@ public class EstoqueService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public EstoqueResponseDom carregarEstoqueById(Long id){
+    public EstoqueResponseDom carregarEstoqueById(Long id) throws CustomException{
+        String mensagem = this.validaIdPathVariableEstoque(id);
+
+        if(mensagem != null){
+            throw new CustomException(mensagem);
+        }
+
         Optional<Estoque> resultado = estoqueRepository.findById(id);
         return resultado.map(EstoqueMappers::estoqueParaEstoqueResponseDom).orElse(null);
     }
@@ -65,7 +71,11 @@ public class EstoqueService {
     public EstoqueResponseDom atualizarEstoque(Long id, EstoqueResquestDom estoque) throws CustomException{
 
         List<String> mensagens = this.validaEstoque(estoque);
+        String mensagem = this.validaIdPathVariableEstoque(id);
 
+        if(mensagem != null){
+            mensagens.add(mensagem);
+        }
         if(!mensagens.isEmpty()){
             throw new CustomException(mensagens);
         }
@@ -151,5 +161,12 @@ public class EstoqueService {
         }
 
         return mensagens;
+    }
+
+    private String validaIdPathVariableEstoque(Long id){
+        if (estoqueRepository.findById(id).isEmpty()){
+            return "Id do estoque inválido!";
+        }
+        return null;
     }
 }
