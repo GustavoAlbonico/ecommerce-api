@@ -1,10 +1,12 @@
 package com.store.pandora.api.useCases.cliente;
 
 import com.store.pandora.api.entitys.Cliente;
+import com.store.pandora.api.entitys.Endereco;
 import com.store.pandora.api.useCases.cliente.domains.ClienteRequestDom;
 import com.store.pandora.api.useCases.cliente.domains.ClienteResponseDom;
 import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.cliente.implement.mappers.ClienteMappers;
+import com.store.pandora.api.useCases.endereco.implement.repositorys.EnderecoRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     public ClienteResponseDom carregarClienteById(Long id) {
         Optional<Cliente> resultado = clienteRepository.findById(id);
 
@@ -31,7 +36,6 @@ public class ClienteService {
 
         if(!resultadoLista.isEmpty()){
             responseLista = resultadoLista.stream().map(ClienteMappers::clienteParaClienteResponseDom).toList();
-
         }
         return responseLista;
     }
@@ -47,7 +51,7 @@ public class ClienteService {
         clienteEntidade.setDataNascimento(cliente.getDataNascimento());
         clienteEntidade.setEmail(cliente.getEmail());
         clienteEntidade.setTelefone(cliente.getTelefone());
-        clienteEntidade.setUsuario(cliente.getUsuario());
+//        clienteEntidade.setUsuario(cliente.getUsuario());
         clienteEntidade.setDeletedAt(cliente.getDeletedAt());
 
         Cliente resultado = clienteRepository.save(clienteEntidade);

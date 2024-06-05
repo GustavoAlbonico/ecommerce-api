@@ -80,6 +80,14 @@ public class Cliente {
         this.usuario = usuario;
     }
 
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
     public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
