@@ -46,7 +46,13 @@ public class CartaoService {
         return CartaoMappers.cartaoParaCartaoResponseDom(resultado);
     }
 
-    public CartaoResponseDom carregarCartaoById(Long id){
+    public CartaoResponseDom carregarCartaoById(Long id) throws CustomException{
+        String mensagem = this.validaIdPathVariableCartao(id);
+
+        if(mensagem != null){
+            throw new CustomException(mensagem);
+        }
+
         Optional<Cartao> resultado = cartaoRepository.findById(id);
         return resultado.map(CartaoMappers::cartaoParaCartaoResponseDom).orElse(null);
     }
@@ -65,7 +71,11 @@ public class CartaoService {
     public CartaoResponseDom atualizarCartao(Long id, CartaoRequestDom cartao) throws CustomException{
 
         List<String> mensagens = this.validaCartao(cartao);
+        String mensagem = this.validaIdPathVariableCartao(id);
 
+        if(mensagem != null){
+            mensagens.add(mensagem);
+        }
         if(!mensagens.isEmpty()){
             throw new CustomException(mensagens);
         }
@@ -125,5 +135,12 @@ public class CartaoService {
         }
 
         return mensagens;
+    }
+
+    private String validaIdPathVariableCartao(Long id){
+        if (cartaoRepository.findById(id).isEmpty()){
+            return "Id do pix inválido!";
+        }
+        return null;
     }
 }
