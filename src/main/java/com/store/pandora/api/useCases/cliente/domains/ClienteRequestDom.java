@@ -1,9 +1,11 @@
 package com.store.pandora.api.useCases.cliente.domains;
 
+import com.store.pandora.api.entitys.Endereco;
 import com.store.pandora.api.entitys.Usuario;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ClienteRequestDom {
 
@@ -12,6 +14,7 @@ public class ClienteRequestDom {
     private String email;
     private String telefone;
     private Usuario usuario;
+    private Long endereco_id;
     private LocalDateTime deletedAt;
 
     public String getNome() {
@@ -52,6 +55,14 @@ public class ClienteRequestDom {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Long getEndereco_id() {
+        return endereco_id;
+    }
+
+    public void setEndereco_id(Long endereco_id) {
+        this.endereco_id = endereco_id;
     }
 
     public LocalDateTime getDeletedAt() {

@@ -1,4 +1,4 @@
-package com.store.pandora.api.useCases.cliente.implement;
+package com.store.pandora.api.useCases.cliente.implement.repositorys;
 
 import com.store.pandora.api.entitys.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
