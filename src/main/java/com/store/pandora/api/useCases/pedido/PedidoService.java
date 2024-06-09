@@ -1,11 +1,10 @@
 package com.store.pandora.api.useCases.pedido;
 
 import com.store.pandora.api.entitys.*;
-import com.store.pandora.api.useCases.cliente.implement.ClienteRepository;
+import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.endereco.implement.repositorys.EnderecoRepository;
 import com.store.pandora.api.useCases.estoque.EstoqueService;
 import com.store.pandora.api.useCases.estoque.implement.repositorys.EstoqueRepository;
-import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemRequestDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemResponseDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoRequestDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
