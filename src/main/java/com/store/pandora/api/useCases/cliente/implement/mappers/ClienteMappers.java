@@ -33,7 +33,7 @@ public class ClienteMappers {
         response.setDataNascimento(cliente.getDataNascimento());
         response.setEmail(cliente.getEmail());
         response.setTelefone(cliente.getTelefone());
-        response.setUsuario(cliente.getUsuario());
+        response.setUsuario_id(cliente.getUsuario().getId());
         response.setDeletedAt(cliente.getDeletedAt());
         response.setEnderecos(listaEnderecos);
 
