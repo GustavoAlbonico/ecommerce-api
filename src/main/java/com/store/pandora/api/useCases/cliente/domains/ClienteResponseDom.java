@@ -13,7 +13,7 @@ public class ClienteResponseDom {
     private LocalDate dataNascimento;
     private String email;
     private String telefone;
-    private Usuario usuario;
+    private Long usuario_id;
     private List<ClienteEnderecoResponseDom> enderecos;
     private LocalDateTime deletedAt;
 
@@ -57,8 +57,12 @@ public class ClienteResponseDom {
         this.telefone = telefone;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(Long usuario_id) {
+        this.usuario_id = usuario_id;
     }
 
     public List<ClienteEnderecoResponseDom> getEnderecos() {
@@ -67,10 +71,6 @@ public class ClienteResponseDom {
 
     public void setEnderecos(List<ClienteEnderecoResponseDom> enderecos) {
         this.enderecos = enderecos;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public LocalDateTime getDeletedAt() {

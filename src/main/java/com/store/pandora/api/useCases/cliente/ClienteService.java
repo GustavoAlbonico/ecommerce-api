@@ -1,12 +1,13 @@
 package com.store.pandora.api.useCases.cliente;
 
 import com.store.pandora.api.entitys.Cliente;
-import com.store.pandora.api.entitys.Endereco;
+import com.store.pandora.api.entitys.Usuario;
 import com.store.pandora.api.useCases.cliente.domains.ClienteRequestDom;
 import com.store.pandora.api.useCases.cliente.domains.ClienteResponseDom;
 import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.cliente.implement.mappers.ClienteMappers;
 import com.store.pandora.api.useCases.endereco.implement.repositorys.EnderecoRepository;
+import com.store.pandora.api.useCases.usuario.implement.repositorys.UsuarioRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class ClienteService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public ClienteResponseDom carregarClienteById(Long id) {
         Optional<Cliente> resultado = clienteRepository.findById(id);
@@ -46,12 +50,15 @@ public class ClienteService {
             throw new CustomException(mensagens);
         }
 
+        Optional<Usuario> usuarioEncontrado = usuarioRepository.findById(cliente.getUsuario_id());
+        Usuario usuario = usuarioEncontrado.get();
+
         Cliente clienteEntidade = new Cliente();
         clienteEntidade.setNome(cliente.getNome());
         clienteEntidade.setDataNascimento(cliente.getDataNascimento());
         clienteEntidade.setEmail(cliente.getEmail());
         clienteEntidade.setTelefone(cliente.getTelefone());
-//        clienteEntidade.setUsuario(cliente.getUsuario());
+        clienteEntidade.setUsuario(usuario);
         clienteEntidade.setDeletedAt(cliente.getDeletedAt());
 
         Cliente resultado = clienteRepository.save(clienteEntidade);
@@ -67,11 +74,15 @@ public class ClienteService {
         }
 
         Optional<Cliente> resultado = clienteRepository.findById(id).map(record -> {
+
+            Optional<Usuario> usuarioEncontrado = usuarioRepository.findById(cliente.getUsuario_id());
+            Usuario usuario = usuarioEncontrado.get();
+
             record.setNome(cliente.getNome());
             record.setDataNascimento(cliente.getDataNascimento());
             record.setEmail(cliente.getEmail());
             record.setTelefone(cliente.getTelefone());
-            record.setUsuario(cliente.getUsuario());
+            record.setUsuario(usuario);
             record.setDeletedAt(cliente.getDeletedAt());
 
             return clienteRepository.save(record);
@@ -91,11 +102,11 @@ public class ClienteService {
             mensagens.add("Data de nascimento do cliente não informada");
         }
 
-        if(cliente.getEmail() == null || cliente.getEmail().equals("")){
+        if(cliente.getEmail() == null || cliente.getEmail().equals("") || !cliente.getEmail().contains("@")){
             mensagens.add("E-mail do cliente não informado");
         }
 
-        if(cliente.getTelefone() == null || cliente.getTelefone().equals("")){
+        if(cliente.getTelefone() == null || cliente.getTelefone().equals("") || cliente.getTelefone().length() < 9){
             mensagens.add("Telefone do cliente não informado");
         }
 
