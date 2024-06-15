@@ -13,3 +13,6 @@ spring:
     username: postgres
     password: postgress
     driverClassName: org.postgresql.Driver
+  security:
+    token:
+      secret: "socorro"
