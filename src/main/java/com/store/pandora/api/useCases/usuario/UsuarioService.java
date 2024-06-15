@@ -1,12 +1,15 @@
 package com.store.pandora.api.useCases.usuario;
 
 import com.store.pandora.api.entitys.Usuario;
+import com.store.pandora.api.infra.security.TokenService;
+import com.store.pandora.api.useCases.usuario.domains.UsuarioLoginResponseDom;
 import com.store.pandora.api.useCases.usuario.domains.UsuarioRequestDom;
 import com.store.pandora.api.useCases.usuario.domains.UsuarioResponseDom;
 import com.store.pandora.api.useCases.usuario.implement.mappers.UsuarioMappers;
 import com.store.pandora.api.useCases.usuario.implement.repositorys.UsuarioRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +21,12 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private TokenService tokenService;
 
     public UsuarioResponseDom carregarUsuarioById(Long id){
         Optional<Usuario> resultado = usuarioRepository.findById(id);
@@ -36,8 +45,7 @@ public class UsuarioService {
         return responseLista;
     }
 
-    public UsuarioResponseDom criarUsuario(UsuarioRequestDom usuario) throws CustomException {
-
+    public UsuarioLoginResponseDom cadastroUsuario(UsuarioRequestDom usuario) throws CustomException {
         List<String> mensagens =  this.validaUsuario(usuario);
 
         if(!mensagens.isEmpty()){
@@ -47,11 +55,26 @@ public class UsuarioService {
         Usuario usuarioEntidade = new Usuario();
 
         usuarioEntidade.setLogin(usuario.getLogin());
-        usuarioEntidade.setSenha(usuario.getSenha());
+        usuarioEntidade.setSenha(passwordEncoder.encode(usuario.getSenha()));
 
-        Usuario resultado = usuarioRepository.save(usuarioEntidade);
+        this.usuarioRepository.save(usuarioEntidade);
 
-        return UsuarioMappers.usuarioParaUsuarioResponseDom(resultado);
+        String token = this.tokenService.gerarToken(usuarioEntidade);
+        return new UsuarioLoginResponseDom(usuarioEntidade.getLogin(),token);
+    }
+
+    public UsuarioLoginResponseDom loginUsuario(UsuarioRequestDom usuario) throws CustomException {
+        List<String> mensagens =  this.validaUsuarioLogin(usuario);
+
+        if(!mensagens.isEmpty()){
+            throw new CustomException(mensagens);
+        }
+
+        Optional<Usuario> usuarioEncontrado = usuarioRepository.findByLogin(usuario.getLogin());
+        Usuario response = usuarioEncontrado.get();
+        String token = this.tokenService.gerarToken(response);
+
+        return new UsuarioLoginResponseDom(response.getLogin(),token);
     }
 
     public UsuarioResponseDom atualizarUsuario(Long id, UsuarioRequestDom usuario) throws CustomException{
@@ -72,15 +95,37 @@ public class UsuarioService {
         return resultado.map(UsuarioMappers::usuarioParaUsuarioResponseDom).orElse(null);
     }
 
+    private List<String> validaUsuarioLogin(UsuarioRequestDom usuario){
+        List<String> mensagens =  new ArrayList<>();
+
+        Optional<Usuario> usuarioEncontrado = usuarioRepository.findByLogin(usuario.getLogin());
+
+        if (usuario.getLogin() == null || usuario.getLogin().equals("")){
+            mensagens.add("Login não informado");
+        }
+        if (usuario.getSenha() == null || usuario.getSenha().equals("")){
+            mensagens.add("Senha não informada");
+        }
+        if(usuarioEncontrado.isEmpty()){
+            mensagens.add("Login inválido!");
+        }else if(!this.passwordEncoder.matches(usuario.getSenha(),usuarioEncontrado.get().getSenha())){
+            mensagens.add("Senha inválida!");
+        }
+
+        return mensagens;
+    }
+
     private List<String> validaUsuario(UsuarioRequestDom usuario){
         List<String> mensagens =  new ArrayList<>();
 
-
         if (usuario.getLogin() == null || usuario.getLogin().equals("")){
-            mensagens.add("Login do usuario não informado");
+            mensagens.add("Login não informado");
         }
         if (usuario.getSenha() == null || usuario.getSenha().equals("")){
-            mensagens.add("Senha do usuario não informada");
+            mensagens.add("Senha não informada");
+        }
+        if(!this.usuarioRepository.findByLogin(usuario.getLogin()).isEmpty()){
+            mensagens.add("O Login já existe!");
         }
 
         return mensagens;
