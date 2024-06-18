@@ -57,10 +57,10 @@ public class UsuarioService {
         usuarioEntidade.setLogin(usuario.getLogin());
         usuarioEntidade.setSenha(passwordEncoder.encode(usuario.getSenha()));
 
-        this.usuarioRepository.save(usuarioEntidade);
+        Usuario response = this.usuarioRepository.save(usuarioEntidade);
 
         String token = this.tokenService.gerarToken(usuarioEntidade);
-        return new UsuarioLoginResponseDom(usuarioEntidade.getLogin(),token);
+        return new UsuarioLoginResponseDom(response.getId(),response.getLogin(),token);
     }
 
     public UsuarioLoginResponseDom loginUsuario(UsuarioRequestDom usuario) throws CustomException {
@@ -74,7 +74,7 @@ public class UsuarioService {
         Usuario response = usuarioEncontrado.get();
         String token = this.tokenService.gerarToken(response);
 
-        return new UsuarioLoginResponseDom(response.getLogin(),token);
+        return new UsuarioLoginResponseDom(response.getId(),response.getLogin(),token);
     }
 
     public UsuarioResponseDom atualizarUsuario(Long id, UsuarioRequestDom usuario) throws CustomException{
