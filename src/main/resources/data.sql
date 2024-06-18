@@ -3,43 +3,43 @@
 --Usuario
 
 INSERT INTO usuario (login, senha)
-VALUES ('alice', '123')
+VALUES ('alice', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('bob', '121312')
+VALUES ('bob', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('charlie', '234324')
+VALUES ('charlie', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('diana', '234fdsfsd')
+VALUES ('diana', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('elena', '324324')
+VALUES ('elena', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('frank', '3242')
+VALUES ('frank', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('gina', '34234')
+VALUES ('gina', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('harry', '234234')
+VALUES ('harry', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('irene', '32424')
+VALUES ('irene', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 INSERT INTO usuario (login, senha)
-VALUES ('jack', '2345546')
+VALUES ('jack', '$2a$10$KlP8kY1aoizCkKQCuiq1u.4stBMVYCNMlNhvHBIOxSH4bY4lZ81MC')
 ON conflict DO nothing;
 
 --Cliente
