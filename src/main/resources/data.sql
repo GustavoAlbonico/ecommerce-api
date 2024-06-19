@@ -283,28 +283,28 @@ VALUES (60, 7)
 ON CONFLICT DO NOTHING;
 
 -- Pedido
-INSERT INTO pedido (valor_total, forma_pagamento, endereco_id, cliente_id)
-VALUES (274.91, 'PIX', 1, 1)
+INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
+VALUES (274.91, 'PIX','PENDENTE', 1, 1)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO pedido (valor_total, forma_pagamento, endereco_id, cliente_id)
-VALUES (309.93, 'CARTAO', 2, 2)
+INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
+VALUES (309.93, 'CARTAO','PAGO', 2, 2)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO pedido (valor_total, forma_pagamento, endereco_id, cliente_id)
-VALUES (819.82, 'BOLETO', 3, 3)
+INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
+VALUES (819.82, 'BOLETO','ENTREGUE', 3, 3)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO pedido (valor_total, forma_pagamento, endereco_id, cliente_id)
-VALUES (299.85, 'PIX', 4, 4)
+INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
+VALUES (299.85, 'PIX','ENTREGUE', 4, 4)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO pedido (valor_total, forma_pagamento, endereco_id, cliente_id)
-VALUES (614.85, 'CARTAO', 5, 5)
+INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
+VALUES (614.85, 'CARTAO','CANCELADO', 5, 5)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO pedido (valor_total, forma_pagamento, endereco_id, cliente_id)
-VALUES (89.98, 'BOLETO', 6, 6)
+INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
+VALUES (89.98, 'BOLETO','CANCELADO', 6, 6)
 ON CONFLICT DO NOTHING;
 
 

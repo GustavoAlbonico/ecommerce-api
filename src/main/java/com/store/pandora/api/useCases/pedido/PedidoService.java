@@ -4,7 +4,6 @@ import com.store.pandora.api.entitys.*;
 import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.endereco.implement.repositorys.EnderecoRepository;
 import com.store.pandora.api.useCases.estoque.EstoqueService;
-import com.store.pandora.api.useCases.estoque.implement.repositorys.EstoqueRepository;
 import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemResponseDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoRequestDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
@@ -35,9 +34,6 @@ public class PedidoService {
     @Autowired
     EnderecoRepository enderecoRepository;
 
-    @Autowired
-    EstoqueRepository estoqueRepository;
-
     private PedidoItemService pedidoItemService;
     private EstoqueService estoqueService;
 
@@ -65,6 +61,7 @@ public class PedidoService {
 
         Pedido pedidoEntidade = new Pedido();
         pedidoEntidade.setFormaPagamento(pedido.getFormaPagamento());
+        pedidoEntidade.setStatus(pedido.getStatus());
         pedidoEntidade.setValorTotal(valorTotal);
         pedidoEntidade.setCliente(cliente);
         pedidoEntidade.setEndereco(endereco);
@@ -77,7 +74,29 @@ public class PedidoService {
 
         estoqueService.atualizarListaEstoque(pedido.getListaPedidoItem());
 
-        return PedidoMappers.pedidoParaPedidoResponseDom(resultadoPedido,responseListPedidoPedidoItem);
+        return PedidoMappers.pedidoPostParaPedidoResponseDom(resultadoPedido,responseListPedidoPedidoItem);
+    }
+
+    public PedidoResponseDom atualizarStatus(Long id, PedidoRequestDom pedido) throws CustomException {
+        List<String> mensagens = new ArrayList<>();
+        String mensagem = this.validaIdPathVariablePedido(id);
+
+        if(pedido.getStatus() == null){
+            mensagens.add("Status do pedido não informado!");
+        }
+        if(mensagem != null){
+            mensagens.add(mensagem);
+        }
+        if(!mensagens.isEmpty()){
+            throw new CustomException(mensagens);
+        }
+
+        Optional<Pedido> resultado = pedidoRepository.findById(id).map(record -> {
+            record.setStatus(pedido.getStatus());
+            return pedidoRepository.save(record);
+        });
+
+        return resultado.map(PedidoMappers::pedidoParaPedidoResponseDom).orElse(null);
     }
 
     private List<String> validaPedido(PedidoRequestDom pedido){
@@ -85,6 +104,10 @@ public class PedidoService {
 
         if(pedido.getFormaPagamento() == null){
             mensagens.add("Forma de pagamento do pedido não informada!");
+        }
+
+        if(pedido.getStatus() == null){
+            mensagens.add("Status do pedido não informado!");
         }
 
         if(pedido.getCliente_id() == null){
@@ -100,5 +123,12 @@ public class PedidoService {
         }
 
         return  mensagens;
+    }
+
+    private String validaIdPathVariablePedido(Long id){
+        if (pedidoRepository.findById(id).isEmpty()){
+            return "Id do Pedido inválido!";
+        }
+        return null;
     }
 }

@@ -32,4 +32,21 @@ public class PedidoController {
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado" + ex.getMessage()));
         }
     }
+
+    @PutMapping("/atualizar/status/{id}")
+    public ResponseEntity<?> atualizarStatusPedido(@PathVariable Long id, @RequestBody PedidoRequestDom pedido){
+
+        try {
+            PedidoResponseDom response = pedidoService.atualizarStatus(id, pedido);
+            if(response == null) {
+                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Erro inesperado!"));
+            }
+            return ResponseEntity.ok(response);
+        } catch (CustomException ce) {
+            ce.printStackTrace();
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
+        } catch (Exception ex) {
+            return  ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.store.pandora.api.useCases.pedido.domains;
 import com.store.pandora.api.entitys.enums.FormaPagamentoEnum;
+import com.store.pandora.api.entitys.enums.StatusEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,6 +12,8 @@ public class PedidoResponseDom {
     private BigDecimal valorTotal;
 
     private FormaPagamentoEnum formaPagamento;
+
+    private StatusEnum status;
 
     private LocalDateTime deletedAt;
 
@@ -74,5 +77,13 @@ public class PedidoResponseDom {
 
     public void setListaPedidoItem(List<PedidoPedidoItemResponseDom> listaPedidoItem) {
         this.listaPedidoItem = listaPedidoItem;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 }
