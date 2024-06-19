@@ -4,6 +4,7 @@ import com.store.pandora.api.entitys.*;
 import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.endereco.implement.repositorys.EnderecoRepository;
 import com.store.pandora.api.useCases.estoque.EstoqueService;
+import com.store.pandora.api.useCases.pedido.domains.PedidoGetResponseDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemResponseDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoRequestDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
@@ -12,6 +13,7 @@ import com.store.pandora.api.useCases.pedido.implement.mappers.PedidoPedidoItemM
 import com.store.pandora.api.useCases.pedido.implement.repositorys.PedidoRepository;
 import com.store.pandora.api.useCases.pedidoItem.PedidoItemService;
 import com.store.pandora.api.useCases.pedidoItem.domains.PedidoItemResponseDom;
+import com.store.pandora.api.useCases.usuario.implement.repositorys.UsuarioRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,9 @@ public class PedidoService {
 
     @Autowired
     EnderecoRepository enderecoRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     private PedidoItemService pedidoItemService;
     private EstoqueService estoqueService;
@@ -99,6 +104,19 @@ public class PedidoService {
         return resultado.map(PedidoMappers::pedidoParaPedidoResponseDom).orElse(null);
     }
 
+    public List<PedidoGetResponseDom> carregarPedidoByUsuarioId(Long id) throws CustomException{
+        String mensagem = this.validaIdPathVariableUsuario(id);
+
+        if(mensagem != null){
+            throw new CustomException(mensagem);
+        }
+
+        Optional<Usuario> usuarioEncontrado = usuarioRepository.findById(id);
+        List<Pedido> listaPedidosEcontrados = pedidoRepository.findByClienteId(usuarioEncontrado.get().getCliente().getId());
+
+        return listaPedidosEcontrados.stream().map(PedidoMappers::pedidoGetParaPedidoResponseDom).toList();
+    }
+
     private List<String> validaPedido(PedidoRequestDom pedido){
         List<String> mensagens = new ArrayList<>();
 
@@ -128,6 +146,13 @@ public class PedidoService {
     private String validaIdPathVariablePedido(Long id){
         if (pedidoRepository.findById(id).isEmpty()){
             return "Id do Pedido inválido!";
+        }
+        return null;
+    }
+
+    private String validaIdPathVariableUsuario(Long id){
+        if (usuarioRepository.findById(id).isEmpty()){
+            return "Id do Usuário inválido!";
         }
         return null;
     }
