@@ -11,7 +11,7 @@ public class PixMappers {
         response.setId(pix.getId());
         response.setValor(pix.getValor());
         response.setDataExpiracao(pix.getDataExpiracao());
-        response.setPedido_id(pix.getId());
+        response.setPedido_id(pix.getPedido().getId());
         response.setDeletedAt(pix.getDeletedAt());
 
         return response;
