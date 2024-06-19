@@ -2,6 +2,7 @@ package com.store.pandora.api.controllers;
 
 import com.store.pandora.api.entitys.enums.CategoriasEnum;
 import com.store.pandora.api.useCases.produto.ProdutoService;
+import com.store.pandora.api.useCases.produto.domains.ProdutoEstoqueResponseDom;
 import com.store.pandora.api.useCases.produto.domains.ProdutoRequestDom;
 import com.store.pandora.api.useCases.produto.domains.ProdutoResponseDom;
 import com.store.pandora.api.utils.CustomException;
@@ -24,7 +25,7 @@ public class ProdutoController {
     @GetMapping("/carregar/{id}")
     public ResponseEntity<?> carregarProdutoById(@PathVariable Long id){
         try{
-            ProdutoResponseDom response = produtoService.carregarProdutoById(id);
+            ProdutoEstoqueResponseDom response = produtoService.carregarProdutoById(id);
 
             if(response != null){
                 return  ResponseEntity.ok().body(response);
@@ -39,7 +40,7 @@ public class ProdutoController {
     @GetMapping("/carregar/categoria/{categoria}")
     public ResponseEntity<?> carregarProdutoByCategoria(@PathVariable CategoriasEnum categoria){
         try{
-            List<ProdutoResponseDom> responseList = produtoService.carregarProdutosByCategoria(categoria);
+            List<ProdutoEstoqueResponseDom> responseList = produtoService.carregarProdutosByCategoria(categoria);
             if(responseList.isEmpty()){
                 return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Essa categoria não existe!"));
             }
@@ -53,7 +54,7 @@ public class ProdutoController {
     @GetMapping("/carregar")
     public ResponseEntity<?> carregarProduto(){
         try{
-            List<ProdutoResponseDom> responseList = produtoService.carregarProduto();
+            List<ProdutoEstoqueResponseDom> responseList = produtoService.carregarProduto();
             if(responseList.isEmpty()){
                 return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum produto cadastrado!"));
             }
