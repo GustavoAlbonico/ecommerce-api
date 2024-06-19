@@ -50,7 +50,7 @@ public class ClienteController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<?> criarProduto(@RequestBody ClienteRequestDom cliente) {
+    public ResponseEntity<?> criarCliente(@RequestBody ClienteRequestDom cliente) {
         try {
             ClienteResponseDom response = clienteService.criarCliente(cliente);
             return ResponseEntity.status(201).body(response);
@@ -64,7 +64,7 @@ public class ClienteController {
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @RequestBody ClienteRequestDom cliente) {
+    public ResponseEntity<?> atualizarCliente(@PathVariable Long id, @RequestBody ClienteRequestDom cliente) {
         try {
             ClienteResponseDom response = clienteService.atualizarCliente(id, cliente);
             if(response == null) {
