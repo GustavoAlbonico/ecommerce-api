@@ -25,6 +25,9 @@ public class Usuario {
     @Column
     private LocalDateTime deletedAt;
 
+    @OneToOne(mappedBy = "usuario")
+    private Cliente cliente;
+
     public Long getId() {
         return id;
     }
@@ -55,5 +58,13 @@ public class Usuario {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

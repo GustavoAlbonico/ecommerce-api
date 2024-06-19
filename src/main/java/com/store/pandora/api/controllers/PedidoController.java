@@ -1,6 +1,7 @@
 package com.store.pandora.api.controllers;
 
 import com.store.pandora.api.useCases.pedido.PedidoService;
+import com.store.pandora.api.useCases.pedido.domains.PedidoGetResponseDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoRequestDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
 import com.store.pandora.api.utils.CustomException;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @Controller
@@ -30,6 +33,37 @@ public class PedidoController {
         }catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado" + ex.getMessage()));
+        }
+    }
+
+    @PutMapping("/atualizar/status/{id}")
+    public ResponseEntity<?> atualizarStatusPedido(@PathVariable Long id, @RequestBody PedidoRequestDom pedido){
+
+        try {
+            PedidoResponseDom response = pedidoService.atualizarStatus(id, pedido);
+            if(response == null) {
+                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Erro inesperado!"));
+            }
+            return ResponseEntity.ok(response);
+        } catch (CustomException ce) {
+            ce.printStackTrace();
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
+        } catch (Exception ex) {
+            return  ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
+        }
+    }
+
+    @GetMapping("/carregar/usuario/{id}")
+    public ResponseEntity<?> carregarPedidoByUsuarioId(@PathVariable Long id){
+        try{
+            List<PedidoGetResponseDom> response = pedidoService.carregarPedidoByUsuarioId(id);
+            if(response != null){
+                return  ResponseEntity.ok().body(response);
+            }
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Erro inesperado!"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
         }
     }
 }

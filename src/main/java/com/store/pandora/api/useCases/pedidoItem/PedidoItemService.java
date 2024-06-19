@@ -1,14 +1,10 @@
 package com.store.pandora.api.useCases.pedidoItem;
 
-import com.store.pandora.api.entitys.Estoque;
 import com.store.pandora.api.entitys.Pedido;
 import com.store.pandora.api.entitys.PedidoItem;
 import com.store.pandora.api.entitys.Produto;
 import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemRequestDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemResponseDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
 import com.store.pandora.api.useCases.pedido.implement.repositorys.PedidoRepository;
-import com.store.pandora.api.useCases.pedidoItem.domains.PedidoItemRequestDom;
 import com.store.pandora.api.useCases.pedidoItem.domains.PedidoItemResponseDom;
 import com.store.pandora.api.useCases.pedidoItem.implement.mappers.PedidoItemMappers;
 import com.store.pandora.api.useCases.pedidoItem.implement.repositorys.PedidoItemRepository;

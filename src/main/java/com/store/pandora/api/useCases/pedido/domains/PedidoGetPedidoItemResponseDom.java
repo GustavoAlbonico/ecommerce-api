@@ -2,13 +2,15 @@ package com.store.pandora.api.useCases.pedido.domains;
 
 import java.math.BigDecimal;
 
-public class PedidoPedidoItemRequestDom {
+public class PedidoGetPedidoItemResponseDom {
+
+    private Long id;
 
     private BigDecimal valorUnitario;
 
     private Integer quantidade;
 
-    private Long produto_id;
+    private String nomeProduto;
 
     public BigDecimal getValorUnitario() {
         return valorUnitario;
@@ -26,11 +28,19 @@ public class PedidoPedidoItemRequestDom {
         this.quantidade = quantidade;
     }
 
-    public Long getProduto_id() {
-        return produto_id;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setProduto_id(Long produto_id) {
-        this.produto_id = produto_id;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

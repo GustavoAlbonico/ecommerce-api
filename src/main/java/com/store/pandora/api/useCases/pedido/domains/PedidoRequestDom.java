@@ -1,11 +1,14 @@
 package com.store.pandora.api.useCases.pedido.domains;
 import com.store.pandora.api.entitys.enums.FormaPagamentoEnum;
+import com.store.pandora.api.entitys.enums.StatusEnum;
 
 import java.util.List;
 
 public class PedidoRequestDom {
 
     private FormaPagamentoEnum formaPagamento;
+
+    private StatusEnum status;
 
     private Long endereco_id;
 
@@ -43,5 +46,13 @@ public class PedidoRequestDom {
 
     public void setListaPedidoItem(List<PedidoPedidoItemRequestDom> listaPedidoItem) {
         this.listaPedidoItem = listaPedidoItem;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 }

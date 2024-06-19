@@ -1,4 +1,5 @@
 package com.store.pandora.api.useCases.pedido.domains;
+
 import com.store.pandora.api.entitys.enums.FormaPagamentoEnum;
 import com.store.pandora.api.entitys.enums.StatusEnum;
 
@@ -6,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class PedidoResponseDom {
+public class PedidoGetResponseDom {
     private Long id;
 
     private BigDecimal valorTotal;
@@ -17,11 +18,11 @@ public class PedidoResponseDom {
 
     private LocalDateTime deletedAt;
 
-    private Long endereco_id;
+    private String enderecoApelido;
 
-    private Long cliente_id;
+    private String clienteNome;
 
-    private List<PedidoPedidoItemResponseDom> listaPedidoItem;
+    private List<PedidoGetPedidoItemResponseDom> listaPedidoItem;
 
     public Long getId() {
         return id;
@@ -47,6 +48,14 @@ public class PedidoResponseDom {
         this.formaPagamento = formaPagamento;
     }
 
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
     public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
@@ -55,35 +64,27 @@ public class PedidoResponseDom {
         this.deletedAt = deletedAt;
     }
 
-    public Long getEndereco_id() {
-        return endereco_id;
+    public String getEnderecoApelido() {
+        return enderecoApelido;
     }
 
-    public void setEndereco_id(Long endereco_id) {
-        this.endereco_id = endereco_id;
+    public void setEnderecoApelido(String enderecoApelido) {
+        this.enderecoApelido = enderecoApelido;
     }
 
-    public Long getCliente_id() {
-        return cliente_id;
+    public String getClienteNome() {
+        return clienteNome;
     }
 
-    public void setCliente_id(Long cliente_id) {
-        this.cliente_id = cliente_id;
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
     }
 
-    public List<PedidoPedidoItemResponseDom> getListaPedidoItem() {
+    public List<PedidoGetPedidoItemResponseDom> getListaPedidoItem() {
         return listaPedidoItem;
     }
 
-    public void setListaPedidoItem(List<PedidoPedidoItemResponseDom> listaPedidoItem) {
+    public void setListaPedidoItem(List<PedidoGetPedidoItemResponseDom> listaPedidoItem) {
         this.listaPedidoItem = listaPedidoItem;
-    }
-
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
     }
 }

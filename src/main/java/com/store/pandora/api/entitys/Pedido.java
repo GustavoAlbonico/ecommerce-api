@@ -1,12 +1,14 @@
 package com.store.pandora.api.entitys;
 
 import com.store.pandora.api.entitys.enums.FormaPagamentoEnum;
+import com.store.pandora.api.entitys.enums.StatusEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @SQLDelete(sql = "UPDATE pedido SET deleted_at = now() WHERE id=?")
@@ -24,6 +26,10 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private FormaPagamentoEnum formaPagamento;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
+
     @Column
     private LocalDateTime deletedAt;
 
@@ -34,6 +40,9 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "pedido")
+    List<PedidoItem> listaPedidoItem;
 
     public Long getId() {
         return id;
@@ -81,5 +90,21 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public List<PedidoItem> getListaPedidoItem() {
+        return listaPedidoItem;
+    }
+
+    public void setListaPedidoItem(List<PedidoItem> listaPedidoItem) {
+        this.listaPedidoItem = listaPedidoItem;
     }
 }
