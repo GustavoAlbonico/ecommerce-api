@@ -1,8 +1,8 @@
 package com.store.pandora.api.controllers;
 
-import com.store.pandora.api.useCases.cliente.ClienteService;
-import com.store.pandora.api.useCases.cliente.domains.ClienteRequestDom;
-import com.store.pandora.api.useCases.cliente.domains.ClienteResponseDom;
+import com.store.pandora.api.useCases.boleto.BoletoService;
+import com.store.pandora.api.useCases.boleto.domains.BoletoRequestDom;
+import com.store.pandora.api.useCases.boleto.domains.BoletoResponseDom;
 import com.store.pandora.api.utils.CustomException;
 import com.store.pandora.api.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +12,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @Controller
-@RequestMapping("/cliente")
-public class ClienteController {
-
+@CrossOrigin
+@RequestMapping("boleto")
+public class BoletoController {
     @Autowired
-    private ClienteService clienteService;
+    private BoletoService boletoService;
 
     @GetMapping("/carregar/{id}")
-    public ResponseEntity<?> carregarClienteById(@PathVariable Long id){
+    public ResponseEntity<?> carregarBoletoById(@PathVariable Long id) {
         try{
-            ClienteResponseDom response = clienteService.carregarClienteById(id);
-
+            BoletoResponseDom response = boletoService.carregarBoletoById(id);
             if(response != null){
                 return  ResponseEntity.ok().body(response);
             }
-            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum cliente cadastrado!"));
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum boleto cadastrado com esse id!"));
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
@@ -36,11 +34,11 @@ public class ClienteController {
     }
 
     @GetMapping("/carregar")
-    public ResponseEntity<?> carregarCliente(){
+    public ResponseEntity<?> carregarBoleto(){
         try{
-            List<ClienteResponseDom> responseList = clienteService.carregarCliente();
+            List<BoletoResponseDom> responseList = boletoService.carregarBoleto();
             if(responseList.isEmpty()){
-                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum cliente cadastrado!"));
+                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Não existe nenhum boleto cadastrado"));
             }
             return ResponseEntity.ok().body(responseList);
         } catch (Exception ex) {
@@ -50,11 +48,25 @@ public class ClienteController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<?> criarCliente(@RequestBody ClienteRequestDom cliente) {
-        try {
-            ClienteResponseDom response = clienteService.criarCliente(cliente);
+    public ResponseEntity<?> criarBoleto(@RequestBody BoletoRequestDom boleto){
+        try{
+            BoletoResponseDom response = boletoService.criarBoleto(boleto);
             return ResponseEntity.status(201).body(response);
-        } catch (CustomException ce) {
+        }catch (CustomException ce){
+            ce.printStackTrace();
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
+        }
+    }
+
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<?> atualizarBoleto(@PathVariable Long id, @RequestBody BoletoRequestDom boleto) {
+        try {
+            BoletoResponseDom response = boletoService.atualizarBoleto(id,boleto);
+            return ResponseEntity.ok().body(response);
+        } catch (CustomException ce){
             ce.printStackTrace();
             return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
         } catch (Exception ex){
@@ -63,17 +75,11 @@ public class ClienteController {
         }
     }
 
-    @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarCliente(@PathVariable Long id, @RequestBody ClienteRequestDom cliente) {
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> excluirBoleto(@PathVariable Long id){
         try {
-            ClienteResponseDom response = clienteService.atualizarCliente(id, cliente);
-            if(response == null) {
-                return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Erro inesperado!"));
-            }
-            return ResponseEntity.ok(response);
-        } catch (CustomException ce) {
-            ce.printStackTrace();
-            return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));
+            boletoService.excluirBoleto(id);
+            return ResponseEntity.ok(null);
         } catch (Exception ex) {
             return  ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
         }
