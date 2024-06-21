@@ -389,14 +389,14 @@ INSERT INTO cartao (numero_cartao, nome_titular, codigo_seguranca, valor, pedido
 VALUES ('1234567890123456', 'João da Silva', '123', 614.85, 5)
 ON CONFLICT DO NOTHING;
 
---Boleto
---INSERT INTO cartao (valor, data_vencimento, pedido_id)
---VALUES (819.82, '2024-07-15', 3)
---ON CONFLICT DO NOTHING;
---
---INSERT INTO cartao (valor, data_vencimento, pedido_id)
---VALUES (89.98, '2024-08-20', 6)
---ON CONFLICT DO NOTHING;
+Boleto
+INSERT INTO cartao (valor, data_vencimento, pedido_id)
+VALUES (819.82, '2024-07-15', 3)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO cartao (valor, data_vencimento, pedido_id)
+VALUES (89.98, '2024-08-20', 6)
+ON CONFLICT DO NOTHING;
 
 
 
