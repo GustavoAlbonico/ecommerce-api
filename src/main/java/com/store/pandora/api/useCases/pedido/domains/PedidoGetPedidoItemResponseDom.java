@@ -10,7 +10,9 @@ public class PedidoGetPedidoItemResponseDom {
 
     private Integer quantidade;
 
-    private String nomeProduto;
+    private BigDecimal valorTotal;
+
+    private PedidoGetProdutoResponseDom produto;
 
     public BigDecimal getValorUnitario() {
         return valorUnitario;
@@ -28,19 +30,26 @@ public class PedidoGetPedidoItemResponseDom {
         this.quantidade = quantidade;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
-    }
-
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
-    }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public PedidoGetProdutoResponseDom getProduto() {
+        return produto;
+    }
+
+    public void setProduto(PedidoGetProdutoResponseDom produto) {
+        this.produto = produto;
     }
 }
