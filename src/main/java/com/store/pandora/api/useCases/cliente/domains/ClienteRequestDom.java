@@ -14,7 +14,6 @@ public class ClienteRequestDom {
     private String email;
     private String telefone;
     private Long usuario_id;
-    private Long endereco_id;
     private LocalDateTime deletedAt;
 
     public String getNome() {
@@ -55,14 +54,6 @@ public class ClienteRequestDom {
 
     public void setUsuario_id(Long usuario_id) {
         this.usuario_id = usuario_id;
-    }
-
-    public Long getEndereco_id() {
-        return endereco_id;
-    }
-
-    public void setEndereco_id(Long endereco_id) {
-        this.endereco_id = endereco_id;
     }
 
     public LocalDateTime getDeletedAt() {

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ClienteMappers {
 
-    public static ClienteResponseDom clienteParaClienteResponseDom(Cliente cliente) {
+    public static ClienteResponseDom clienteParaClienteEnderecoResponseDom(Cliente cliente) {
 
         List<ClienteEnderecoResponseDom> listaEnderecos = new ArrayList<>();
 
@@ -36,6 +36,21 @@ public class ClienteMappers {
         response.setUsuario_id(cliente.getUsuario().getId());
         response.setDeletedAt(cliente.getDeletedAt());
         response.setEnderecos(listaEnderecos);
+
+        return response;
+    }
+
+    public static ClienteResponseDom clienteParaClienteResponseDom(Cliente cliente) {
+
+        ClienteResponseDom response = new ClienteResponseDom();
+
+        response.setId(cliente.getId());
+        response.setNome(cliente.getNome());
+        response.setDataNascimento(cliente.getDataNascimento());
+        response.setEmail(cliente.getEmail());
+        response.setTelefone(cliente.getTelefone());
+        response.setUsuario_id(cliente.getUsuario().getId());
+        response.setDeletedAt(cliente.getDeletedAt());
 
         return response;
     }

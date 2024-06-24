@@ -31,7 +31,7 @@ public class ClienteService {
     public ClienteResponseDom carregarClienteById(Long id) {
         Optional<Cliente> resultado = clienteRepository.findById(id);
 
-        return resultado.map(ClienteMappers::clienteParaClienteResponseDom).orElse(null);
+        return resultado.map(ClienteMappers::clienteParaClienteEnderecoResponseDom).orElse(null);
     }
 
     public ClienteResponseDom carregarClienteByUsuarioId(Long id) throws CustomException {
@@ -41,7 +41,7 @@ public class ClienteService {
         }
 
         Cliente resultado = clienteRepository.findByUsuarioId(id);
-        return ClienteMappers.clienteParaClienteResponseDom(resultado);
+        return ClienteMappers.clienteParaClienteEnderecoResponseDom(resultado);
     }
 
     public List<ClienteResponseDom> carregarCliente(){
@@ -49,7 +49,7 @@ public class ClienteService {
         List<ClienteResponseDom> responseLista = new ArrayList<>();
 
         if(!resultadoLista.isEmpty()){
-            responseLista = resultadoLista.stream().map(ClienteMappers::clienteParaClienteResponseDom).toList();
+            responseLista = resultadoLista.stream().map(ClienteMappers::clienteParaClienteEnderecoResponseDom).toList();
         }
         return responseLista;
     }
