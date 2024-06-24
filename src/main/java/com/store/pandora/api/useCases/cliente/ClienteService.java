@@ -34,6 +34,16 @@ public class ClienteService {
         return resultado.map(ClienteMappers::clienteParaClienteResponseDom).orElse(null);
     }
 
+    public ClienteResponseDom carregarClienteByUsuarioId(Long id) throws CustomException {
+        String mensagem = this.validaIdPathVariableUsuario(id);
+        if(mensagem != null){
+            throw new CustomException(mensagem);
+        }
+
+        Cliente resultado = clienteRepository.findByUsuarioId(id);
+        return ClienteMappers.clienteParaClienteResponseDom(resultado);
+    }
+
     public List<ClienteResponseDom> carregarCliente(){
         List<Cliente> resultadoLista = clienteRepository.findAll();
         List<ClienteResponseDom> responseLista = new ArrayList<>();
@@ -111,5 +121,12 @@ public class ClienteService {
         }
 
         return mensagens;
+    }
+
+    private String validaIdPathVariableUsuario(Long id){
+        if (usuarioRepository.findById(id).isEmpty()){
+            return "Id do Usuário inválido!";
+        }
+        return null;
     }
 }
