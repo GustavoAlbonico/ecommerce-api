@@ -13,7 +13,7 @@ public class ClienteRequestDom {
     private LocalDate dataNascimento;
     private String email;
     private String telefone;
-    private Usuario usuario;
+    private Long usuario_id;
     private Long endereco_id;
     private LocalDateTime deletedAt;
 
@@ -49,12 +49,12 @@ public class ClienteRequestDom {
         this.telefone = telefone;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getUsuario_id() {
+        return usuario_id;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario_id(Long usuario_id) {
+        this.usuario_id = usuario_id;
     }
 
     public Long getEndereco_id() {
