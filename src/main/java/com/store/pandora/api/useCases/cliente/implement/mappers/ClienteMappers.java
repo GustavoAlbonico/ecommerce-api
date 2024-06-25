@@ -16,6 +16,8 @@ public class ClienteMappers {
 
         for(Endereco endereco : cliente.getEnderecos()){
             ClienteEnderecoResponseDom clienteEnderecoResponseDom = new ClienteEnderecoResponseDom();
+
+            clienteEnderecoResponseDom.setId(endereco.getId());
             clienteEnderecoResponseDom.setApelido(endereco.getApelido());
             clienteEnderecoResponseDom.setLogradouro(endereco.getLogradouro());
             clienteEnderecoResponseDom.setNumero(endereco.getNumero());

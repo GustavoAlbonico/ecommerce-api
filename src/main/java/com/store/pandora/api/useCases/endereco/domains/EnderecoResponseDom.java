@@ -13,7 +13,7 @@ public class EnderecoResponseDom {
     private String bairro;
     private String numero;
     private String complemento;
-    private Cliente cliente;
+    private Long cliente_id;
     private LocalDate deletedAt;
 
     public Long getId() {
@@ -72,12 +72,12 @@ public class EnderecoResponseDom {
         this.complemento = complemento;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Long getCliente_id() {
+        return cliente_id;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente_id(Long cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
     public LocalDate getDeletedAt() {
@@ -87,4 +87,6 @@ public class EnderecoResponseDom {
     public void setDeletedAt(LocalDate deletedAt) {
         this.deletedAt = deletedAt;
     }
+
+
 }

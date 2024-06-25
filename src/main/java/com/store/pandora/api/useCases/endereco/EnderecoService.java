@@ -1,6 +1,8 @@
 package com.store.pandora.api.useCases.endereco;
 
+import com.store.pandora.api.entitys.Cliente;
 import com.store.pandora.api.entitys.Endereco;
+import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.endereco.domains.EnderecoRequestDom;
 import com.store.pandora.api.useCases.endereco.domains.EnderecoResponseDom;
 import com.store.pandora.api.useCases.endereco.implement.mappers.EnderecoMappers;
@@ -18,6 +20,9 @@ public class EnderecoService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     public EnderecoResponseDom carregarEnderecoById(Long id){
 
@@ -45,6 +50,9 @@ public class EnderecoService {
             throw new CustomException(mensagens);
         }
 
+        Optional<Cliente> clienteEncontrado = clienteRepository.findById(endereco.getCliente_id());
+        Cliente cliente = clienteEncontrado.get();
+
         Endereco enderecoEntidade = new Endereco();
         enderecoEntidade.setApelido(endereco.getApelido());
         enderecoEntidade.setLogradouro(endereco.getLogradouro());
@@ -52,6 +60,7 @@ public class EnderecoService {
         enderecoEntidade.setBairro(endereco.getBairro());
         enderecoEntidade.setNumero(endereco.getNumero());
         enderecoEntidade.setComplemento(endereco.getComplemento());
+        enderecoEntidade.setCliente(cliente);
 
         Endereco resultado = enderecoRepository.save(enderecoEntidade);
 
@@ -66,12 +75,16 @@ public class EnderecoService {
         }
 
         Optional<Endereco> resultado = enderecoRepository.findById(id).map(record -> {
+            Optional<Cliente> clienteEncontrado = clienteRepository.findById(endereco.getCliente_id());
+            Cliente cliente = clienteEncontrado.get();
+
             record.setApelido(endereco.getApelido());
             record.setLogradouro(endereco.getLogradouro());
             record.setCep(endereco.getCep());
             record.setBairro(endereco.getBairro());
             record.setNumero(endereco.getNumero());
             record.setComplemento(endereco.getComplemento());
+            record.setCliente(cliente);
 
             return enderecoRepository.save(record);
         });

@@ -16,7 +16,7 @@ public class EnderecoMappers {
         response.setBairro(endereco.getBairro());
         response.setNumero(endereco.getNumero());
         response.setComplemento(endereco.getComplemento());
-        response.setCliente(endereco.getCliente());
+        response.setCliente_id(endereco.getCliente().getId());
         response.setDeletedAt(endereco.getDeletedAt());
 
         return response;
