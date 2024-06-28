@@ -31,7 +31,7 @@ public class PedidoItemService {
     @Autowired
     ProdutoRepository produtoRepository;
 
-    public List<PedidoItemResponseDom> criarListaPedidoItem(Long pedidoId, List<PedidoPedidoItemRequestDom> listaPedidoItem) throws CustomException{
+    public List<PedidoItem> criarListaPedidoItem(Long pedidoId, List<PedidoPedidoItemRequestDom> listaPedidoItem) throws CustomException{
 
         List<String> mensagens = this.validaListaPedidoItem(listaPedidoItem);
 
@@ -57,9 +57,7 @@ public class PedidoItemService {
             return pedidoItemEntidade;
         }).toList();
 
-        List<PedidoItem> resultadoLista = pedidoItemRepository.saveAll(listaPedidoItemEntidade);
-
-        return resultadoLista.stream().map(PedidoItemMappers::pedidoItemParaPedidoItemResponseDom).collect(Collectors.toList());
+        return pedidoItemRepository.saveAll(listaPedidoItemEntidade);
     }
 
     private List<String> validaListaPedidoItem(List<PedidoPedidoItemRequestDom> listaPedidoItemRequest){

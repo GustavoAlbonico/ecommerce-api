@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin
-@RequestMapping("boleto")
+@RequestMapping("/boleto")
 public class BoletoController {
     @Autowired
     private BoletoService boletoService;

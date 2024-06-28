@@ -25,7 +25,7 @@ public class PedidoController {
     public ResponseEntity<?> criarPedido(@RequestBody PedidoRequestDom pedido){
 
         try {
-            PedidoResponseDom response = pedidoService.criarPedido(pedido);
+            PedidoGetResponseDom response = pedidoService.criarPedido(pedido);
             return ResponseEntity.status(201).body(response);
         }catch (CustomException ce){
             ce.printStackTrace();

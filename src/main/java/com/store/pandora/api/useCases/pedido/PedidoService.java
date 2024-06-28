@@ -47,7 +47,7 @@ public class PedidoService {
         this.estoqueService = estoqueService;
     }
     @Transactional(rollbackFor = {Exception.class, CustomException.class})
-    public PedidoResponseDom criarPedido(PedidoRequestDom pedido) throws CustomException {
+    public PedidoGetResponseDom criarPedido(PedidoRequestDom pedido) throws CustomException {
         List<String> mensagens = this.validaPedido(pedido);
 
         if(!mensagens.isEmpty()){
@@ -73,13 +73,11 @@ public class PedidoService {
 
         Pedido resultadoPedido = pedidoRepository.save(pedidoEntidade);
 
-        List<PedidoItemResponseDom> responseListPedidoItem = pedidoItemService.criarListaPedidoItem(resultadoPedido.getId(),pedido.getListaPedidoItem());
-        List<PedidoPedidoItemResponseDom> responseListPedidoPedidoItem =
-                responseListPedidoItem.stream().map(PedidoPedidoItemMappers::pedidoItemResponseDomParaPedidoPedidoItemResponseDom).toList();
+        List<PedidoItem> responseListPedidoItem = pedidoItemService.criarListaPedidoItem(resultadoPedido.getId(),pedido.getListaPedidoItem());
 
         estoqueService.atualizarListaEstoque(pedido.getListaPedidoItem());
 
-        return PedidoMappers.pedidoPostParaPedidoResponseDom(resultadoPedido,responseListPedidoPedidoItem);
+        return PedidoMappers.pedidoParaPedidoPostResponseDom(resultadoPedido,responseListPedidoItem);
     }
 
     public PedidoResponseDom atualizarStatus(Long id, PedidoRequestDom pedido) throws CustomException {
