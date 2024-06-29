@@ -1,6 +1,6 @@
 package com.store.pandora.api.useCases.pedido.domains;
 
-public class PedidoGetProdutoResponseDom {
+public class PedidoProdutoResponseDom {
 
     private String nome;
 

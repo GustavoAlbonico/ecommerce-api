@@ -16,6 +16,8 @@ public class PedidoRequestDom {
 
     private List<PedidoPedidoItemRequestDom> listaPedidoItem;
 
+    private PedidoDadosFormaPagamentoRequestDom dadosFormaPagamento;
+
     public FormaPagamentoEnum getFormaPagamento() {
         return formaPagamento;
     }
@@ -55,4 +57,9 @@ public class PedidoRequestDom {
     public void setStatus(StatusEnum status) {
         this.status = status;
     }
+
+    public PedidoDadosFormaPagamentoRequestDom getDadosFormaPagamento() {
+        return dadosFormaPagamento;
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.store.pandora.api.controllers;
 
 import com.store.pandora.api.useCases.pedido.PedidoService;
-import com.store.pandora.api.useCases.pedido.domains.PedidoGetResponseDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoRequestDom;
 import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
 import com.store.pandora.api.utils.CustomException;
@@ -25,7 +24,7 @@ public class PedidoController {
     public ResponseEntity<?> criarPedido(@RequestBody PedidoRequestDom pedido){
 
         try {
-            PedidoGetResponseDom response = pedidoService.criarPedido(pedido);
+            PedidoResponseDom response = pedidoService.criarPedido(pedido);
             return ResponseEntity.status(201).body(response);
         }catch (CustomException ce){
             ce.printStackTrace();
@@ -56,7 +55,7 @@ public class PedidoController {
     @GetMapping("/carregar/usuario/{id}")
     public ResponseEntity<?> carregarPedidoByUsuarioId(@PathVariable Long id){
         try{
-            List<PedidoGetResponseDom> response = pedidoService.carregarPedidoByUsuarioId(id);
+            List<PedidoResponseDom> response = pedidoService.carregarPedidoByUsuarioId(id);
             if(response != null){
                 return  ResponseEntity.ok().body(response);
             }

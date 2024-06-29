@@ -1,23 +1,20 @@
 package com.store.pandora.api.useCases.pedido.implement.mappers;
 
-import com.store.pandora.api.entitys.Pedido;;
+import com.store.pandora.api.entitys.Pedido;
 import com.store.pandora.api.entitys.PedidoItem;
-import com.store.pandora.api.useCases.pedido.domains.PedidoGetPedidoItemResponseDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoGetResponseDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemResponseDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
+import com.store.pandora.api.useCases.pedido.domains.*;
 
 
 import java.util.List;
 
 public class PedidoMappers {
-    public static PedidoGetResponseDom pedidoParaPedidoPostResponseDom(Pedido pedido, List<PedidoItem> listaPedidoItemEntidade){
+    public static PedidoResponseDom pedidoParaPedidoPostResponseDom(Pedido pedido, List<PedidoItem> listaPedidoItemEntidade){
 
-        List<PedidoGetPedidoItemResponseDom> listaPedidoItem =
+        List<PedidoPedidoItemResponseDom> listaPedidoItem =
                 listaPedidoItemEntidade.stream()
                         .map(PedidoPedidoItemMappers::pedidoItemParaPedidoGetPedidoItemResponseDom).toList();
 
-        PedidoGetResponseDom response = new PedidoGetResponseDom();
+        PedidoResponseDom response = new PedidoResponseDom();
 
         response.setId(pedido.getId());
         response.setDeletedAt(pedido.getDeletedAt());
@@ -35,29 +32,9 @@ public class PedidoMappers {
 
         List<PedidoPedidoItemResponseDom> listaPedidoItem =
                 pedido.getListaPedidoItem().stream()
-                        .map(PedidoPedidoItemMappers::pedidoItemParaPedidoPedidoItemResponseDom).toList();
-
-        PedidoResponseDom response = new PedidoResponseDom();
-
-        response.setId(pedido.getId());
-        response.setDeletedAt(pedido.getDeletedAt());
-        response.setFormaPagamento(pedido.getFormaPagamento());
-        response.setStatus(pedido.getStatus());
-        response.setValorTotal(pedido.getValorTotal());
-        response.setCliente_id(pedido.getCliente().getId());
-        response.setEndereco_id(pedido.getEndereco().getId());
-        response.setListaPedidoItem(listaPedidoItem);
-
-        return response;
-    }
-
-    public static PedidoGetResponseDom pedidoGetParaPedidoResponseDom(Pedido pedido){
-
-        List<PedidoGetPedidoItemResponseDom> listaPedidoItem =
-                pedido.getListaPedidoItem().stream()
                         .map(PedidoPedidoItemMappers::pedidoItemParaPedidoGetPedidoItemResponseDom).toList();
 
-        PedidoGetResponseDom response = new PedidoGetResponseDom();
+        PedidoResponseDom response = new PedidoResponseDom();
 
         response.setId(pedido.getId());
         response.setDeletedAt(pedido.getDeletedAt());
@@ -67,6 +44,37 @@ public class PedidoMappers {
         response.setClienteNome(pedido.getCliente().getNome());
         response.setEnderecoApelido(pedido.getEndereco().getApelido());
         response.setListaPedidoItem(listaPedidoItem);
+
+        return response;
+    }
+
+    public static PedidoPixRequestDom pedidoParaPedidoPixRequestDom(Pedido pedido){
+        PedidoPixRequestDom response = new PedidoPixRequestDom();
+
+        response.setValor(pedido.getValorTotal());
+        response.setPedido_id(pedido.getId());
+
+        return response;
+    }
+
+    public static PedidoBoletoRequestDom pedidoParaBoletoRequestDom(Pedido pedido, PedidoDadosFormaPagamentoRequestDom dadosFormaPagamento){
+        PedidoBoletoRequestDom response = new PedidoBoletoRequestDom();
+
+        response.setValor(pedido.getValorTotal());
+        response.setPedido_id(pedido.getId());
+        response.setDataVencimento(dadosFormaPagamento.getDataVencimento());
+
+        return response;
+    }
+
+    public static PedidoCartaoRequestDom pedidoParaCartaoRequestDom(Pedido pedido, PedidoDadosFormaPagamentoRequestDom dadosFormaPagamento){
+        PedidoCartaoRequestDom response = new PedidoCartaoRequestDom();
+
+        response.setValor(pedido.getValorTotal());
+        response.setPedido_id(pedido.getId());
+        response.setNumeroCartao(dadosFormaPagamento.getNumeroCartao());
+        response.setNomeTitular(dadosFormaPagamento.getNomeTitular());
+        response.setCodigoSeguranca(dadosFormaPagamento.getCodigoSeguranca());
 
         return response;
     }

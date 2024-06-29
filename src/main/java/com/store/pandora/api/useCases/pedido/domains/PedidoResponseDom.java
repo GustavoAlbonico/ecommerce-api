@@ -1,4 +1,5 @@
 package com.store.pandora.api.useCases.pedido.domains;
+
 import com.store.pandora.api.entitys.enums.FormaPagamentoEnum;
 import com.store.pandora.api.entitys.enums.StatusEnum;
 
@@ -17,9 +18,9 @@ public class PedidoResponseDom {
 
     private LocalDateTime deletedAt;
 
-    private Long endereco_id;
+    private String enderecoApelido;
 
-    private Long cliente_id;
+    private String clienteNome;
 
     private List<PedidoPedidoItemResponseDom> listaPedidoItem;
 
@@ -47,6 +48,14 @@ public class PedidoResponseDom {
         this.formaPagamento = formaPagamento;
     }
 
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
     public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
@@ -55,20 +64,20 @@ public class PedidoResponseDom {
         this.deletedAt = deletedAt;
     }
 
-    public Long getEndereco_id() {
-        return endereco_id;
+    public String getEnderecoApelido() {
+        return enderecoApelido;
     }
 
-    public void setEndereco_id(Long endereco_id) {
-        this.endereco_id = endereco_id;
+    public void setEnderecoApelido(String enderecoApelido) {
+        this.enderecoApelido = enderecoApelido;
     }
 
-    public Long getCliente_id() {
-        return cliente_id;
+    public String getClienteNome() {
+        return clienteNome;
     }
 
-    public void setCliente_id(Long cliente_id) {
-        this.cliente_id = cliente_id;
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
     }
 
     public List<PedidoPedidoItemResponseDom> getListaPedidoItem() {
@@ -77,13 +86,5 @@ public class PedidoResponseDom {
 
     public void setListaPedidoItem(List<PedidoPedidoItemResponseDom> listaPedidoItem) {
         this.listaPedidoItem = listaPedidoItem;
-    }
-
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
     }
 }

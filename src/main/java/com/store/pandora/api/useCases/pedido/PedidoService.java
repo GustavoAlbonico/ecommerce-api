@@ -1,18 +1,19 @@
 package com.store.pandora.api.useCases.pedido;
 
 import com.store.pandora.api.entitys.*;
+import com.store.pandora.api.useCases.boleto.BoletoService;
+import com.store.pandora.api.useCases.boleto.implement.repositorys.BoletoRepository;
+import com.store.pandora.api.useCases.cartao.CartaoService;
+import com.store.pandora.api.useCases.cartao.implement.repositorys.CartaoRepository;
 import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.endereco.implement.repositorys.EnderecoRepository;
 import com.store.pandora.api.useCases.estoque.EstoqueService;
-import com.store.pandora.api.useCases.pedido.domains.PedidoGetResponseDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoPedidoItemResponseDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoRequestDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoResponseDom;
+import com.store.pandora.api.useCases.pedido.domains.*;
 import com.store.pandora.api.useCases.pedido.implement.mappers.PedidoMappers;
-import com.store.pandora.api.useCases.pedido.implement.mappers.PedidoPedidoItemMappers;
 import com.store.pandora.api.useCases.pedido.implement.repositorys.PedidoRepository;
 import com.store.pandora.api.useCases.pedidoItem.PedidoItemService;
-import com.store.pandora.api.useCases.pedidoItem.domains.PedidoItemResponseDom;
+import com.store.pandora.api.useCases.pix.PixService;
+import com.store.pandora.api.useCases.pix.implement.repositorys.PixRepository;
 import com.store.pandora.api.useCases.usuario.implement.repositorys.UsuarioRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,15 +40,24 @@ public class PedidoService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    private PedidoItemService pedidoItemService;
-    private EstoqueService estoqueService;
+    private final PedidoItemService pedidoItemService;
+    private final EstoqueService estoqueService;
 
-    public PedidoService(PedidoItemService pedidoItemService, EstoqueService estoqueService) {
+    private final PixService pixService;
+
+    private final CartaoService cartaoService;
+
+    private final BoletoService boletoService;
+
+    public PedidoService(PedidoItemService pedidoItemService, EstoqueService estoqueService,PixService pixService,CartaoService cartaoService,BoletoService boletoService) {
         this.pedidoItemService = pedidoItemService;
         this.estoqueService = estoqueService;
+        this.pixService = pixService;
+        this.cartaoService = cartaoService;
+        this.boletoService = boletoService;
     }
     @Transactional(rollbackFor = {Exception.class, CustomException.class})
-    public PedidoGetResponseDom criarPedido(PedidoRequestDom pedido) throws CustomException {
+    public PedidoResponseDom criarPedido(PedidoRequestDom pedido) throws CustomException {
         List<String> mensagens = this.validaPedido(pedido);
 
         if(!mensagens.isEmpty()){
@@ -77,6 +87,24 @@ public class PedidoService {
 
         estoqueService.atualizarListaEstoque(pedido.getListaPedidoItem());
 
+        switch (pedido.getFormaPagamento()){
+            case PIX:
+                PedidoPixRequestDom pixRequestDom =
+                        PedidoMappers.pedidoParaPedidoPixRequestDom(resultadoPedido);
+                pixService.criarPix(pixRequestDom);
+                break;
+            case BOLETO:
+                PedidoBoletoRequestDom boletoRequestDom =
+                        PedidoMappers.pedidoParaBoletoRequestDom(resultadoPedido, pedido.getDadosFormaPagamento());
+                boletoService.criarBoleto(boletoRequestDom);
+                break;
+            case CARTAO:
+                PedidoCartaoRequestDom cartaoRequestDom =
+                        PedidoMappers.pedidoParaCartaoRequestDom(resultadoPedido, pedido.getDadosFormaPagamento());
+                cartaoService.criarCartao(cartaoRequestDom);
+                break;
+        }
+
         return PedidoMappers.pedidoParaPedidoPostResponseDom(resultadoPedido,responseListPedidoItem);
     }
 
@@ -102,7 +130,7 @@ public class PedidoService {
         return resultado.map(PedidoMappers::pedidoParaPedidoResponseDom).orElse(null);
     }
 
-    public List<PedidoGetResponseDom> carregarPedidoByUsuarioId(Long id) throws CustomException{
+    public List<PedidoResponseDom> carregarPedidoByUsuarioId(Long id) throws CustomException{
         String mensagem = this.validaIdPathVariableUsuario(id);
 
         if(mensagem != null){
@@ -112,7 +140,7 @@ public class PedidoService {
         Optional<Usuario> usuarioEncontrado = usuarioRepository.findById(id);
         List<Pedido> listaPedidosEcontrados = pedidoRepository.findByClienteId(usuarioEncontrado.get().getCliente().getId());
 
-        return listaPedidosEcontrados.stream().map(PedidoMappers::pedidoGetParaPedidoResponseDom).toList();
+        return listaPedidosEcontrados.stream().map(PedidoMappers::pedidoParaPedidoResponseDom).toList();
     }
 
     private List<String> validaPedido(PedidoRequestDom pedido){

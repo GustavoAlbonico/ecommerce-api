@@ -3,7 +3,6 @@ package com.store.pandora.api.controllers;
 import com.store.pandora.api.useCases.cliente.ClienteService;
 import com.store.pandora.api.useCases.cliente.domains.ClienteRequestDom;
 import com.store.pandora.api.useCases.cliente.domains.ClienteResponseDom;
-import com.store.pandora.api.useCases.pedido.domains.PedidoGetResponseDom;
 import com.store.pandora.api.utils.CustomException;
 import com.store.pandora.api.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
