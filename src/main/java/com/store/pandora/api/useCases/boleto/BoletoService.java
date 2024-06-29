@@ -38,7 +38,7 @@ public class BoletoService {
 
         Boleto boletoEntidade = new Boleto();
         boletoEntidade.setValor(boleto.getValor());
-        boletoEntidade.setDataVencimento(LocalDateTime.now().plusDays(7));
+        boletoEntidade.setDataVencimento(LocalDateTime.now().plusDays(1));
         boletoEntidade.setPedido(pedido);
 
         Boleto resultado = boletoRepository.save(boletoEntidade);

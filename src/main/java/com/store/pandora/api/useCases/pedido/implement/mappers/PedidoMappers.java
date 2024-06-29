@@ -4,7 +4,6 @@ import com.store.pandora.api.entitys.Pedido;
 import com.store.pandora.api.entitys.PedidoItem;
 import com.store.pandora.api.useCases.pedido.domains.*;
 
-
 import java.util.List;
 
 public class PedidoMappers {
@@ -62,7 +61,6 @@ public class PedidoMappers {
 
         response.setValor(pedido.getValorTotal());
         response.setPedido_id(pedido.getId());
-        response.setDataVencimento(dadosFormaPagamento.getDataVencimento());
 
         return response;
     }

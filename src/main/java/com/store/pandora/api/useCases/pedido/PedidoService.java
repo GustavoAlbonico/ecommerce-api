@@ -2,9 +2,7 @@ package com.store.pandora.api.useCases.pedido;
 
 import com.store.pandora.api.entitys.*;
 import com.store.pandora.api.useCases.boleto.BoletoService;
-import com.store.pandora.api.useCases.boleto.implement.repositorys.BoletoRepository;
 import com.store.pandora.api.useCases.cartao.CartaoService;
-import com.store.pandora.api.useCases.cartao.implement.repositorys.CartaoRepository;
 import com.store.pandora.api.useCases.cliente.implement.repositorys.ClienteRepository;
 import com.store.pandora.api.useCases.endereco.implement.repositorys.EnderecoRepository;
 import com.store.pandora.api.useCases.estoque.EstoqueService;
@@ -13,7 +11,6 @@ import com.store.pandora.api.useCases.pedido.implement.mappers.PedidoMappers;
 import com.store.pandora.api.useCases.pedido.implement.repositorys.PedidoRepository;
 import com.store.pandora.api.useCases.pedidoItem.PedidoItemService;
 import com.store.pandora.api.useCases.pix.PixService;
-import com.store.pandora.api.useCases.pix.implement.repositorys.PixRepository;
 import com.store.pandora.api.useCases.usuario.implement.repositorys.UsuarioRepository;
 import com.store.pandora.api.utils.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +37,14 @@ public class PedidoService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    private final PedidoItemService pedidoItemService;
-    private final EstoqueService estoqueService;
+    private  final PedidoItemService pedidoItemService;
+    private  final EstoqueService estoqueService;
 
-    private final PixService pixService;
+    private  final PixService pixService;
 
-    private final CartaoService cartaoService;
+    private  final CartaoService cartaoService;
 
-    private final BoletoService boletoService;
+    private  final BoletoService boletoService;
 
     public PedidoService(PedidoItemService pedidoItemService, EstoqueService estoqueService,PixService pixService,CartaoService cartaoService,BoletoService boletoService) {
         this.pedidoItemService = pedidoItemService;

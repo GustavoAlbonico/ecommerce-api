@@ -5,21 +5,11 @@ import java.time.LocalDateTime;
 
 public class PedidoDadosFormaPagamentoRequestDom {
 
-    private LocalDateTime dataVencimento;
-
     private String numeroCartao;
 
     private String nomeTitular;
 
     private String codigoSeguranca;
-
-    public LocalDateTime getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(LocalDateTime dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
 
     public String getNumeroCartao() {
         return numeroCartao;

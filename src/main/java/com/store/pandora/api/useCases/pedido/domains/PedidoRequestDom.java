@@ -61,5 +61,8 @@ public class PedidoRequestDom {
     public PedidoDadosFormaPagamentoRequestDom getDadosFormaPagamento() {
         return dadosFormaPagamento;
     }
-
+    
+    public void setDadosFormaPagamento(PedidoDadosFormaPagamentoRequestDom dadosFormaPagamento) {
+        this.dadosFormaPagamento = dadosFormaPagamento;
+    }
 }
