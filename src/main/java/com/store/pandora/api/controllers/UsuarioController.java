@@ -1,5 +1,6 @@
 package com.store.pandora.api.controllers;
 import com.store.pandora.api.useCases.usuario.UsuarioService;
+import com.store.pandora.api.useCases.usuario.domains.UsuarioCadastroRequestDom;
 import com.store.pandora.api.useCases.usuario.domains.UsuarioLoginResponseDom;
 import com.store.pandora.api.useCases.usuario.domains.UsuarioRequestDom;
 import com.store.pandora.api.useCases.usuario.domains.UsuarioResponseDom;
@@ -87,7 +88,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<?> cadastroUsuario(@RequestBody UsuarioRequestDom usuario){
+    public ResponseEntity<?> cadastroUsuario(@RequestBody UsuarioCadastroRequestDom usuario){
         try {
             UsuarioLoginResponseDom response = usuarioService.cadastroUsuario(usuario);
             return ResponseEntity.ok().body(response);

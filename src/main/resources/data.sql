@@ -117,12 +117,12 @@ ON CONFLICT DO NOTHING;
 
 INSERT INTO endereco (logradouro, cep, bairro, numero, cliente_id, apelido, complemento)
 VALUES
-    ('Rua G', '24680-357', 'São Francisco', '700', 7, 'Casa Laranja', 'Frente')
+    ('Rua G', '24680-357', 'São Francisco', '700', 1, 'Casa Laranja', 'Frente')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO endereco (logradouro, cep, bairro, numero, cliente_id, apelido, complemento)
 VALUES
-    ('Avenida H', '97531-468', 'Liberdade', '800', 8, 'Casa Branca', 'Garagem')
+    ('Avenida H', '97531-468', 'Liberdade', '800', 1, 'Casa Branca', 'Garagem')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO endereco (logradouro, cep, bairro, numero, cliente_id, apelido, complemento)
