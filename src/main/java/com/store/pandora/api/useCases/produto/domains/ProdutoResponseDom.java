@@ -11,7 +11,7 @@ public class ProdutoResponseDom {
     private String nome;
     private String imagem;
     private BigDecimal valorUnitario;
-    private String Descricao;
+    private String descricao;
     private String classificacaoIndicativa;
     private String numeroJogadores;
     private CategoriasEnum categoria;
@@ -50,11 +50,11 @@ public class ProdutoResponseDom {
     }
 
     public String getDescricao() {
-        return Descricao;
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
-        Descricao = descricao;
+        this.descricao = descricao;
     }
 
     public String getClassificacaoIndicativa() {
