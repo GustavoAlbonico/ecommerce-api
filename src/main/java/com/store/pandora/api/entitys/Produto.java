@@ -26,6 +26,7 @@ public class Produto {
 
     @Column(nullable = false)
     private BigDecimal valorUnitario;
+    @Column(length = 500)
     private String Descricao;
     private String classificacaoIndicativa;
     private String numeroJogadores;

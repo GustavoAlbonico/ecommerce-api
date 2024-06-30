@@ -139,80 +139,80 @@ ON CONFLICT DO NOTHING;
 
 -- Jogos de Cartas
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Uno', 'uno.png', 19.99, 'CARTAS', 'Um divertido jogo de cartas para toda a família.', 'Livre', '2-10')
+VALUES ('Matryoshka', 'Matryoshka-caixa.png', 59.90, 'CARTAS', 'Algumas Matryoshkas raras estão sendo trocadas por colecionadores de antiguidades. Todos tentam colecionar um conjunto completo ou pelo menos bonecas do mesmo tamanho. Quem terá a coleção mais valiosa ao fim da disputa?.', 'Livre', '3-5')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Dominion', 'dominion.png', 29.99, 'CARTAS', 'Um jogo de construção de baralhos estratégico.', '10+', '2-4')
+VALUES ('QU4TO', 'Qu4to-caixa.png', 59.90, 'CARTAS', 'QU4TO é um jogo de cartas dinâmico e divertido, onde jogadores tentam descartar o mais rapidamente suas mãos, jogando conjuntos de cartas de números iguais ou sequências.', '10+', '2-5')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Exploding Kittens', 'exploding_kittens.png', 24.99, 'CARTAS', 'Um jogo de cartas rápido e maluco.', '16+', '2-5')
+VALUES ('Nem a Pato', 'Caixa-Nem-a-Pato.png', 59.90, 'CARTAS', 'Adivinhe o número, mas cuidado para não passar do ponto!', '16+', '2-10')
 ON CONFLICT DO NOTHING;
 
 -- Jogos de Tabuleiro
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Catan', 'catan.png', 39.99, 'TABULEIRO', 'Construa estradas, cidades e negocie recursos neste clássico jogo de tabuleiro.', '10+', '3-4')
+VALUES ('A.E.R.O.', 'Caixav4-Aero.png', 134.90, 'TABULEIRO', 'A gangue do Meleca está a solta, aterrorizando os planetas de nossa galáxia! Apenas um grupo qualificado poderia dar um basta nesse grupo de malfeitores, o A.E.R.O. (Agentes Espaciais de Resgate Orbital).', '10+', '2-4')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Ticket to Ride', 'ticket_to_ride.png', 34.99, 'TABULEIRO', 'Viaje de trem pelos Estados Unidos neste empolgante jogo de tabuleiro.', '8+', '2-5')
+VALUES ('Àiyé', 'Aiye-caixa1.png', 149.90, 'TABULEIRO', 'Em Àiyé os jogadores administram o destino de um povo ancestral, determinando aqueles que tomam a liderança e trabalham em conjunto no dia-a-dia para o bem de todos. Com a manipulação das energias na mancala, ela se modifica para que os jogadores criem combinações poderosas, se enfrentem e acumulem pontos em busca da vitória.', '8+', '2-4')
 ON CONFLICT DO NOTHING;
 
 -- Jogos de RPG
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Dungeons & Dragons: Starter Set', 'dnd_starter_set.png', 29.99, 'RPG', 'Entre em um mundo de aventuras e magia com este conjunto inicial de Dungeons & Dragons.', '12+', '3-6')
+VALUES ('Dungeons & Dragons: Starter Set', 'dungeon-dragons-set.png', 29.99, 'RPG', 'Entre em um mundo de aventuras e magia com este conjunto inicial de Dungeons & Dragons.', '12+', '3-6')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Pathfinder Core Rulebook', 'pathfinder_core_rulebook.png', 49.99, 'RPG', 'Um conjunto abrangente de regras para o jogo de RPG Pathfinder.', '14+', '2+')
+VALUES ('Pathfinder Core Rulebook', 'pathfinder.png', 49.99, 'RPG', 'Um conjunto abrangente de regras para o jogo de RPG Pathfinder.', '14+', '2+')
 ON CONFLICT DO NOTHING;
 
 -- Cartas Magic
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Magic: The Gathering - Core Set 2024', 'magic_core_set_2024.png', 39.99, 'MAGIC', 'O mais recente conjunto básico de cartas para o popular jogo de cartas Magic: The Gathering.', '13+', '2')
+VALUES ('Magic: The Gathering - Core Set 2024', 'Magic-The-Gathering-Core-Set-2024.png', 39.99, 'MAGIC', 'O mais recente conjunto básico de cartas para o popular jogo de cartas Magic: The Gathering.', '13+', '2')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Magic: The Gathering - Commander Legends', 'commander_legends.png', 49.99, 'MAGIC', 'Um conjunto de cartas projetado para o formato Commander do Magic: The Gathering.', '13+', '2+')
+VALUES ('Magic: The Gathering - Commander Legends', 'Magic-The-Gathering-Commander-Legends.png', 49.99, 'MAGIC', 'Um conjunto de cartas projetado para o formato Commander do Magic: The Gathering.', '13+', '2+')
 ON CONFLICT DO NOTHING;
 
 -- Mais jogos de Tabuleiro
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Azul', 'azul.png', 49.99, 'TABULEIRO', 'Crie padrões de azulejos para decorar o Palácio Real de Évora.', '8+', '2-4')
+VALUES ('Amígdala', 'amygala-caixa.png', 249.90, 'TABULEIRO', 'A vida é cheia de emoções, e a região do cérebro associada principalmente ao processamento dessas emoções é a amígdala.', '8+', '2-4')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Scythe', 'scythe.png', 59.99, 'TABULEIRO', 'Lute por recursos e território em uma Europa alternativa dos anos 1920.', '14+', '1-7')
+VALUES ('Anachrony', 'caixa-Anachrony-1.png', 449.90, 'TABULEIRO', 'Anachrony apresenta um sistema único de colocação de trabalhadores de duas camadas. Para viajar à Capital ou aventurar-se nas áreas devastadas de recursos, os jogadores precisam não de apenas vários especialistas (engenheiros, cientistas, administradores e gênios), mas também de Exoesqueletos para protegê-los e melhorá-los – e ambos são escassos.', '14+', '1-4')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('7 Wonders', '7_wonders.png', 49.99, 'TABULEIRO', 'Construa sua civilização e alcance a glória em apenas 7 eras.', '10+', '3-7')
+VALUES ('Anachrony', 'caixa-Anachrony-Expansao-Classica-1.png', 299.90, 'TABULEIRO', 'Leve sua experiência de Anachrony para um novo nível com três novos módulos.', '10+', '1-4')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Terraforming Mars', 'terraforming_mars.png', 59.99, 'TABULEIRO', 'Transforme o Planeta Vermelho em um local habitável para a humanidade.', '12+', '1-5')
+VALUES ('Cartógrafos', 'cartografos.png', 99.90, 'TABULEIRO', 'Em Cartógrafos, os jogadores competem para ganhar a maior quantidade de estrelas de reputação ao longo de quatro estações do ano. A cada estação, os jogadores desenham em suas folhas de mapa e ganham reputação cumprindo os decretos da rainha antes do término da estação. O jogador com mais estrelas de reputação ao fim do inverno é o vencedor!.', '12+', '1-100')
 ON CONFLICT DO NOTHING;
 
 -- Mais jogos de RPG
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Starfinder Core Rulebook', 'starfinder_core_rulebook.png', 54.99, 'RPG', 'Explore o espaço sideral e lute contra alienígenas neste jogo de RPG de ficção científica.', '14+', '2-6')
+VALUES ('Starfinder Core Rulebook', 'Starfinder-Core-Rulebook.png', 54.99, 'RPG', 'Explore o espaço sideral e lute contra alienígenas neste jogo de RPG de ficção científica.', '14+', '2-6')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Call of Cthulhu Investigator Handbook', 'cthulhu_investigator_handbook.png', 39.99, 'RPG', 'Detalhes e dicas para criar e interpretar investigadores em Call of Cthulhu.', '16+', '1+')
+VALUES ('Call of Cthulhu Investigator Handbook', 'InvestigatorHandbook.png', 39.99, 'RPG', 'Detalhes e dicas para criar e interpretar investigadores em Call of Cthulhu.', '16+', '1+')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Vampire: The Masquerade 5th Edition', 'vampire_5th_edition.png', 44.99, 'RPG', 'Assuma o papel de um vampiro e navegue pelas intrigas da sociedade vampírica.', '18+', '2-5')
+VALUES ('Vampire: The Masquerade 5th Edition', 'Vampire-The-Masquerade-5th-Edition.png', 44.99, 'RPG', 'Assuma o papel de um vampiro e navegue pelas intrigas da sociedade vampírica.', '18+', '2-5')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Call of Cthulhu Keeper Rulebook', 'cthulhu_keeper_rulebook.png', 39.99, 'RPG', 'Guia essencial para o mestre de Call of Cthulhu, repleto de horrores cósmicos.', '16+', '1+')
+VALUES ('Call of Cthulhu Keeper Rulebook', 'Call-of-Cthulhu-Keeper-Rulebook.png', 39.99, 'RPG', 'Guia essencial para o mestre de Call of Cthulhu, repleto de horrores cósmicos.', '16+', '1+')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Dungeon World', 'dungeon_world.png', 29.99, 'RPG', 'Explore masmorras, enfrente monstros e crie histórias épicas neste RPG narrativo.', '12+', '2-6')
+VALUES ('Dungeon World', '20_DungeonWorld.png', 29.99, 'RPG', 'Explore masmorras, enfrente monstros e crie histórias épicas neste RPG narrativo.', '12+', '2-6')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
@@ -221,28 +221,28 @@ ON CONFLICT DO NOTHING;
 
 -- Mais Cartas Magic
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Magic: The Gathering - Adventures in the Forgotten Realms', 'adventures_in_the_forgotten_realms.png', 44.99, 'MAGIC', 'Aventure-se no mundo de Dungeons & Dragons com este conjunto de cartas.', '13+', '2')
+VALUES ('Magic: The Gathering - Adventures in the Forgotten Realms', 'Magic-The-Gathering-Adventures-in-the-Forgotten-Realms.png', 44.99, 'MAGIC', 'Aventure-se no mundo de Dungeons & Dragons com este conjunto de cartas.', '13+', '2')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Magic: The Gathering - Strixhaven: School of Mages', 'strixhaven_school_of_mages.png', 39.99, 'MAGIC', 'Junte-se a uma das cinco faculdades mágicas de Strixhaven e mostre seu conhecimento.', '13+', '2')
+VALUES ('Magic: The Gathering - Strixhaven: School of Mages', 'Magic-The-Gathering-Strixhaven-School-of-Mages.png', 39.99, 'MAGIC', 'Junte-se a uma das cinco faculdades mágicas de Strixhaven e mostre seu conhecimento.', '13+', '2')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Magic: The Gathering - Zendikar Rising', 'zendikar_rising.png', 49.99, 'MAGIC', 'Explore o mundo selvagem de Zendikar em busca de tesouros e aventuras.', '13+', '2')
+VALUES ('Magic: The Gathering - Zendikar Rising', 'Magic-The-Gathering-Zendikar-Rising.png', 49.99, 'MAGIC', 'Explore o mundo selvagem de Zendikar em busca de tesouros e aventuras.', '13+', '2')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Magic: The Gathering - Kaldheim', 'kaldheim.png', 44.99, 'MAGIC', 'Viaje para o mundo viking de Kaldheim e desafie os deuses para ganhar poder.', '13+', '2')
+VALUES ('Magic: The Gathering - Kaldheim', 'Magic-The-Gathering-Kaldheim.png', 44.99, 'MAGIC', 'Viaje para o mundo viking de Kaldheim e desafie os deuses para ganhar poder.', '13+', '2')
 ON CONFLICT DO NOTHING;
 
 -- Mais jogos de Cartas
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Uno Flip', 'uno_flip.png', 14.99, 'CARTAS', 'Um emocionante jogo de cartas onde as regras podem ser revertidas a qualquer momento.', '7+', '2-10')
+VALUES ('Uno Flip', 'Uno-Flip.png', 14.99, 'CARTAS', 'Um emocionante jogo de cartas onde as regras podem ser revertidas a qualquer momento.', '7+', '2-10')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO produto (nome, imagem, valor_unitario, categoria, descricao, classificacao_indicativa, numero_jogadores)
-VALUES ('Legendary: A Marvel Deck Building Game', 'legendary_marvel.png', 54.99, 'CARTAS', 'Monte sua equipe de super-heróis e derrote os vilões neste emocionante jogo de construção de deck.', '12+', '1-5')
+VALUES ('Legendary: A Marvel Deck Building Game', 'legendary.png', 54.99, 'CARTAS', 'Monte sua equipe de super-heróis e derrote os vilões neste emocionante jogo de construção de deck.', '12+', '1-5')
 ON CONFLICT DO NOTHING;
 
 --Estoque
