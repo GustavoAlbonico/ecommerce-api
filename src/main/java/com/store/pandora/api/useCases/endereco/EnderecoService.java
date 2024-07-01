@@ -96,6 +96,10 @@ public class EnderecoService {
 
         List<String> mensagens = new ArrayList<>();
 
+        if(endereco.getApelido() == null || endereco.getApelido().equals("")){
+            mensagens.add("Apelido do endereço não informado");
+        }
+
         if(endereco.getLogradouro() == null || endereco.getLogradouro().equals("")){
             mensagens.add("Logradouro do endereço não informado");
         }

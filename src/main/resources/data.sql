@@ -284,15 +284,15 @@ ON CONFLICT DO NOTHING;
 
 -- Pedido
 INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
-VALUES (274.91, 'PIX','PENDENTE', 1, 1)
+VALUES (274.91, 'PIX','CANCELADO', 1, 1)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
-VALUES (309.93, 'CARTAO','PAGO', 2, 2)
+VALUES (309.93, 'CARTAO','PAGO', 1, 1)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)
-VALUES (819.82, 'BOLETO','ENTREGUE', 3, 3)
+VALUES (819.82, 'BOLETO','ENTREGUE', 1, 1)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO pedido (valor_total, forma_pagamento, status, endereco_id, cliente_id)

@@ -112,12 +112,16 @@ public class ClienteService {
             mensagens.add("Data de nascimento do cliente não informada");
         }
 
-        if(cliente.getEmail() == null || cliente.getEmail().equals("") || !cliente.getEmail().contains("@")){
+        if(cliente.getEmail() == null || cliente.getEmail().equals("")){
             mensagens.add("E-mail do cliente não informado");
+        } else if (!cliente.getEmail().contains("@")){
+            mensagens.add("E-mail inválido");
         }
 
-        if(cliente.getTelefone() == null || cliente.getTelefone().equals("") || cliente.getTelefone().length() < 9){
+        if(cliente.getTelefone() == null || cliente.getTelefone().equals("")){
             mensagens.add("Telefone do cliente não informado");
+        } else if (cliente.getTelefone().length() < 9){
+            mensagens.add("Telefone inválido");
         }
 
         return mensagens;
