@@ -38,6 +38,7 @@ public class CartaoService {
         cartaoEntidade.setNumeroCartao(cartao.getNumeroCartao());
         cartaoEntidade.setCodigoSeguranca(cartao.getCodigoSeguranca());
         cartaoEntidade.setNomeTitular(cartao.getNomeTitular());
+        cartaoEntidade.setBandeiraCartao(cartao.getBandeiraCartao());
         cartaoEntidade.setValor(cartao.getValor());
         cartaoEntidade.setPedido(pedido);
 
@@ -87,6 +88,7 @@ public class CartaoService {
             record.setNumeroCartao(cartao.getNumeroCartao());
             record.setCodigoSeguranca(cartao.getCodigoSeguranca());
             record.setNomeTitular(cartao.getNomeTitular());
+            record.setBandeiraCartao(cartao.getBandeiraCartao());
             record.setValor(cartao.getValor());
             record.setPedido(pedido);
 
@@ -103,6 +105,10 @@ public class CartaoService {
     private List<String> validaCartao(CartaoRequestDom cartao) {
 
         List<String> mensagens = new ArrayList<>();
+
+        if(cartao.getBandeiraCartao() == null){
+            mensagens.add("Bandeira do cartão não informado!");
+        }
 
         if (cartao.getPedido_id() == null) {
             mensagens.add("pedido_id do cartão não informado!");

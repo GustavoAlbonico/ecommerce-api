@@ -381,12 +381,12 @@ VALUES (299.85, TIMESTAMP '2024-06-10 18:30:00.0000000', 4)
 ON CONFLICT DO NOTHING;
 
 --Cartao
-INSERT INTO cartao (numero_cartao, nome_titular, codigo_seguranca, valor, pedido_id)
-VALUES ('9876543210987654', 'Maria Oliveira', '456', 309.93, 2)
+INSERT INTO cartao (numero_cartao, nome_titular, codigo_seguranca, valor, pedido_id, bandeira_cartao)
+VALUES ('9876543210987654', 'Maria Oliveira', '456', 309.93, 2,'VISA')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO cartao (numero_cartao, nome_titular, codigo_seguranca, valor, pedido_id)
-VALUES ('1234567890123456', 'João da Silva', '123', 614.85, 5)
+INSERT INTO cartao (numero_cartao, nome_titular, codigo_seguranca, valor, pedido_id, bandeira_cartao)
+VALUES ('1234567890123456', 'João da Silva', '123', 614.85, 5,'MASTERCARD')
 ON CONFLICT DO NOTHING;
 
 --Boleto

@@ -1,5 +1,6 @@
 package com.store.pandora.api.entitys;
 
+import com.store.pandora.api.entitys.enums.BandeiraCartaoEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -26,6 +27,10 @@ public class Cartao {
 
     @Column(nullable = false)
     private BigDecimal valor;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BandeiraCartaoEnum bandeiraCartao;
 
     private LocalDateTime deletedAt;
     @OneToOne
@@ -86,5 +91,13 @@ public class Cartao {
 
     public void setCodigoSeguranca(String codigoSeguranca) {
         this.codigoSeguranca = codigoSeguranca;
+    }
+
+    public BandeiraCartaoEnum getBandeiraCartao() {
+        return bandeiraCartao;
+    }
+
+    public void setBandeiraCartao(BandeiraCartaoEnum bandeiraCartao) {
+        this.bandeiraCartao = bandeiraCartao;
     }
 }

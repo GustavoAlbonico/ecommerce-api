@@ -12,10 +12,12 @@ public class CartaoMappers {
         response.setId(cartao.getId());
         response.setCodigoSeguranca(cartao.getCodigoSeguranca());
         response.setNumeroCartao(cartao.getNumeroCartao());
+        response.setBandeiraCartao(cartao.getBandeiraCartao());
         response.setNomeTitular(cartao.getNomeTitular());
         response.setValor(cartao.getValor());
         response.setPedido_id(cartao.getPedido().getId());
         response.setDeletedAt(cartao.getDeletedAt());
+        response.setBandeiraCartao(cartao.getBandeiraCartao());
 
         return response;
     }

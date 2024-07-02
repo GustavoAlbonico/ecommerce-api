@@ -1,4 +1,6 @@
 package com.store.pandora.api.useCases.cartao.domains;
+import com.store.pandora.api.entitys.enums.BandeiraCartaoEnum;
+
 import java.math.BigDecimal;
 
 public class CartaoRequestDom {
@@ -12,6 +14,8 @@ public class CartaoRequestDom {
     private BigDecimal valor;
 
     private Long pedido_id;
+
+    private BandeiraCartaoEnum bandeiraCartao;
 
     public String getNomeTitular() {
         return nomeTitular;
@@ -51,5 +55,13 @@ public class CartaoRequestDom {
 
     public void setCodigoSeguranca(String codigoSeguranca) {
         this.codigoSeguranca = codigoSeguranca;
+    }
+
+    public BandeiraCartaoEnum getBandeiraCartao() {
+        return bandeiraCartao;
+    }
+
+    public void setBandeiraCartao(BandeiraCartaoEnum bandeiraCartao) {
+        this.bandeiraCartao = bandeiraCartao;
     }
 }

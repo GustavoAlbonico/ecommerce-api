@@ -91,7 +91,7 @@ public class UsuarioController {
     public ResponseEntity<?> cadastroUsuario(@RequestBody UsuarioCadastroRequestDom usuario){
         try {
             UsuarioLoginResponseDom response = usuarioService.cadastroUsuario(usuario);
-            return ResponseEntity.ok().body(response);
+            return ResponseEntity.status(201).body(response);
         }catch (CustomException ce){
             ce.printStackTrace();
             return ResponseEntity.badRequest().body(ResponseUtil.responseMap(ce.getMessages()));

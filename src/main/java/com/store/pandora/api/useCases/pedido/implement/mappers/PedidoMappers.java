@@ -73,7 +73,7 @@ public class PedidoMappers {
         response.setNumeroCartao(dadosFormaPagamento.getNumeroCartao());
         response.setNomeTitular(dadosFormaPagamento.getNomeTitular());
         response.setCodigoSeguranca(dadosFormaPagamento.getCodigoSeguranca());
-
+        response.setBandeiraCartao(dadosFormaPagamento.getBandeiraCartao());
         return response;
     }
 }

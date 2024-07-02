@@ -1,7 +1,6 @@
 package com.store.pandora.api.useCases.pedido.domains;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import com.store.pandora.api.entitys.enums.BandeiraCartaoEnum;
 
 public class PedidoDadosFormaPagamentoRequestDom {
 
@@ -10,6 +9,8 @@ public class PedidoDadosFormaPagamentoRequestDom {
     private String nomeTitular;
 
     private String codigoSeguranca;
+
+    private BandeiraCartaoEnum bandeiraCartao;
 
     public String getNumeroCartao() {
         return numeroCartao;
@@ -33,5 +34,13 @@ public class PedidoDadosFormaPagamentoRequestDom {
 
     public void setCodigoSeguranca(String codigoSeguranca) {
         this.codigoSeguranca = codigoSeguranca;
+    }
+
+    public BandeiraCartaoEnum getBandeiraCartao() {
+        return bandeiraCartao;
+    }
+
+    public void setBandeiraCartao(BandeiraCartaoEnum bandeiraCartao) {
+        this.bandeiraCartao = bandeiraCartao;
     }
 }

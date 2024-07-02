@@ -1,4 +1,6 @@
 package com.store.pandora.api.useCases.cartao.domains;
+import com.store.pandora.api.entitys.enums.BandeiraCartaoEnum;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -17,6 +19,8 @@ public class CartaoResponseDom {
     private LocalDateTime deletedAt;
 
     private Long pedido_id;
+
+    private BandeiraCartaoEnum bandeiraCartao;
 
     public Long getId() {
         return id;
@@ -72,5 +76,13 @@ public class CartaoResponseDom {
 
     public void setCodigoSeguranca(String codigoSeguranca) {
         this.codigoSeguranca = codigoSeguranca;
+    }
+
+    public BandeiraCartaoEnum getBandeiraCartao() {
+        return bandeiraCartao;
+    }
+
+    public void setBandeiraCartao(BandeiraCartaoEnum bandeiraCartao) {
+        this.bandeiraCartao = bandeiraCartao;
     }
 }
