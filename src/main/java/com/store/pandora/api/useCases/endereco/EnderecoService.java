@@ -92,6 +92,10 @@ public class EnderecoService {
         return resultado.map(EnderecoMappers::enderecoParaEnderecoResponseDom).orElse(null);
     }
 
+    public void excluirEndereco(Long id){
+        enderecoRepository.deleteById(id);
+    }
+
     private List<String> validaEndereco(EnderecoRequestDom endereco){
 
         List<String> mensagens = new ArrayList<>();

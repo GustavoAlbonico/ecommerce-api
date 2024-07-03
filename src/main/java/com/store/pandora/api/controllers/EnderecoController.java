@@ -91,4 +91,14 @@ public class EnderecoController {
         }
     }
 
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> excluirEndereco(@PathVariable Long id){
+        try {
+            enderecoService.excluirEndereco(id);
+            return ResponseEntity.ok(null);
+        } catch (Exception ex) {
+            return  ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado " + ex.getMessage()));
+        }
+    }
+
 }
