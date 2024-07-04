@@ -8,13 +8,13 @@ Gustavo [linkedin](https://www.linkedin.com/in/gustavo-albonico-goncalves/),
 Julia  [linkedin](https://www.linkedin.com/in/juliatibes/), 
 Maria Eduarda [linkedin](https://www.linkedin.com/in/maria-eduarda-rebelo-961306193/).
 
-**Proposta**
+**Proposta:**
 - Criar uma aplicação  web para suportar um ecommerce, com frontend e backend.
 - De acordo com o tema do ecommerce, deve ser criado um layout especifico para o frontend.
 - Deve ser possível o cliente realizar o cadastro e fazer pedidos.
 - Bem como lsitar todos os pedidos realizados para o mesmo.
 
-**Escopo**
+**Escopo:**
 - Tela inicial deve listar os produtos disponíveis do ecommerce.
 - Ainda na tela incial (home) deve ser possível listar os produtos por categorias, com no mínimo 5 produtos em cada uma.
 - Produtos devem ter controle de estoque.
@@ -30,13 +30,13 @@ Maria Eduarda [linkedin](https://www.linkedin.com/in/maria-eduarda-rebelo-961306
 - Para o cadastro de cliente deve ter uma tela onde seja possível a manutenção dados do cliente.
 - Deve ser possível adicionar, editar ou excluir endereços do cliente. Deve ser na mesma tela de manutenção do cliente
 
-**Requisitos**
+**Requisitos:**
 - Frontend: Reactjs + Typescript
 - Backend: Java + JPA
 - Banco de dados: Postgresql
 
 **Tutorial para rodar a aplicação completa:**
-   - Back <a href="https://github.com/GustavoAlbonico/ecommerce-api" target="_blank">API</a>.
+   - Back [API](https://github.com/GustavoAlbonico/ecommerce-api)
      - Clone o projeto
      - Abra o projeto com a sua IDEA para Java
      - Configure o arquivo .yml com as informações do seu banco
