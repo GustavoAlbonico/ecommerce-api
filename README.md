@@ -3,9 +3,9 @@
 **Ecommerce de Jogos**
 
 **Equipe**
-Barbara [linkedin](https://www.linkedin.com/in/barbara-stefani-d-b052b1140/).
-Gustavo [linkedin](https://www.linkedin.com/in/gustavo-albonico-goncalves/).
-Julia  [linkedin](https://www.linkedin.com/in/juliatibes/).
+Barbara [linkedin](https://www.linkedin.com/in/barbara-stefani-d-b052b1140/), 
+Gustavo [linkedin](https://www.linkedin.com/in/gustavo-albonico-goncalves/), 
+Julia  [linkedin](https://www.linkedin.com/in/juliatibes/), 
 Maria Eduarda [linkedin](https://www.linkedin.com/in/maria-eduarda-rebelo-961306193/).
 
 **Proposta**
@@ -43,9 +43,9 @@ Maria Eduarda [linkedin](https://www.linkedin.com/in/maria-eduarda-rebelo-961306
      - Crie o banco de dados com o nome informado no arquivo .yml
      - Iniciei o projeto (Vai ser inseridos dados automaticamente quando iniciar o projeto).
        - OBS: Necessário excluir e criar o banco quando reiniciar o back-end para os dados não duplicar.
-  - Front [APP](https://github.com/GustavoAlbonico/ecommerce-app).
-    - Clone o projeto.
-    - Abra o projeto com a IDEA.
-    - npm i para instalar as dependências.
-    - npm start para iniciar o projeto.
-    - OBS: CTRL + C parar o projeto se necessário.
+   - Front [APP](https://github.com/GustavoAlbonico/ecommerce-app).
+     - Clone o projeto.
+     - Abra o projeto com a IDEA.
+     - npm i para instalar as dependências.
+     - npm start para iniciar o projeto.
+        - OBS: CTRL + C parar o projeto se necessário.
