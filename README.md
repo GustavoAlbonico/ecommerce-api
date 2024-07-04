@@ -2,7 +2,7 @@
 **Back-End do projeto Ecommerce relacionado a matéria de desenvolvimento web 4ª fase ADS**
 **Ecommerce de Jogos**
 
-**Equipe: **
+**Equipe:**
 Barbara [linkedin](https://www.linkedin.com/in/barbara-stefani-d-b052b1140/), 
 Gustavo [linkedin](https://www.linkedin.com/in/gustavo-albonico-goncalves/), 
 Julia  [linkedin](https://www.linkedin.com/in/juliatibes/), 
