@@ -2,7 +2,7 @@
 **Back-End do projeto Ecommerce relacionado a matéria de desenvolvimento web 4ª fase ADS**
 **Ecommerce de Jogos**
 
-**Equipe**
+**Equipe: **
 Barbara [linkedin](https://www.linkedin.com/in/barbara-stefani-d-b052b1140/), 
 Gustavo [linkedin](https://www.linkedin.com/in/gustavo-albonico-goncalves/), 
 Julia  [linkedin](https://www.linkedin.com/in/juliatibes/), 
@@ -35,7 +35,7 @@ Maria Eduarda [linkedin](https://www.linkedin.com/in/maria-eduarda-rebelo-961306
 - Backend: Java + JPA
 - Banco de dados: Postgresql
 
-1. Tutorial para rodar a aplicação completa:
+**Tutorial para rodar a aplicação completa:**
    - Back [API](https://github.com/GustavoAlbonico/ecommerce-api).
      - Clone o projeto
      - Abra o projeto com a sua IDEA para Java
