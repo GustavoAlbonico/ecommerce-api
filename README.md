@@ -36,7 +36,7 @@ Maria Eduarda [linkedin](https://www.linkedin.com/in/maria-eduarda-rebelo-961306
 - Banco de dados: Postgresql
 
 **Tutorial para rodar a aplicação completa:**
-   - Back [API](https://github.com/GustavoAlbonico/ecommerce-api).
+   - Back <a href="https://github.com/GustavoAlbonico/ecommerce-api" target="_blank">API</a>.
      - Clone o projeto
      - Abra o projeto com a sua IDEA para Java
      - Configure o arquivo .yml com as informações do seu banco
